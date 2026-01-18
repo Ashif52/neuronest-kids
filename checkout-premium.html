@@ -465,14 +465,14 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>State</label>
-                                    <select required>
+                                    <select id="stateSelect" required>
                                         <option value="">Select State</option>
                                         <option>Andhra Pradesh</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>City</label>
-                                    <select required>
+                                    <select id="citySelect" required>
                                         <option value="">Select City</option>
                                         <option>Mumbai</option>
                                         <option>Delhi NCR</option>
@@ -615,6 +615,36 @@
 
         // Load summary on page load
         loadOrderSummary();
+
+        // Make State and City mutually exclusive
+        const stateSelect = document.getElementById('stateSelect');
+        const citySelect = document.getElementById('citySelect');
+
+        stateSelect.addEventListener('change', function () {
+            if (this.value !== '') {
+                citySelect.disabled = true;
+                citySelect.value = '';
+                citySelect.style.opacity = '0.5';
+                citySelect.style.cursor = 'not-allowed';
+            } else {
+                citySelect.disabled = false;
+                citySelect.style.opacity = '1';
+                citySelect.style.cursor = 'pointer';
+            }
+        });
+
+        citySelect.addEventListener('change', function () {
+            if (this.value !== '') {
+                stateSelect.disabled = true;
+                stateSelect.value = '';
+                stateSelect.style.opacity = '0.5';
+                stateSelect.style.cursor = 'not-allowed';
+            } else {
+                stateSelect.disabled = false;
+                stateSelect.style.opacity = '1';
+                stateSelect.style.cursor = 'pointer';
+            }
+        });
     </script>
 
 </body>
