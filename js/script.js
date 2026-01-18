@@ -62,7 +62,7 @@ const productsData = {
         price: "₹950",
         badge: "For Neurodiverse Kids",
         benefits: ["Promotes Relaxation", "Digestive Health", "Sensory Friendly"],
-        ingredients: ["Chamomile", "Magnesium", "Probiotics"]
+        ingredients: ["Omega-3 DHA & EPA", "Magnesium", "Probiotics", "Calcium"]
     },
     'focus': {
         name: "FOCUS",
@@ -71,7 +71,7 @@ const productsData = {
         price: "₹950",
         badge: "For Neurodiverse Kids",
         benefits: ["Sustained Energy", "Focus Enhancement", "Mood Stabilization"],
-        ingredients: ["Iron", "Zinc", "Vitamin B12"]
+        ingredients: ["Iron", "Zinc", "Vitamin B6, B12, D3"]
     }
 };
 

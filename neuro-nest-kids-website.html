@@ -10,6 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="css/india-glow.css">
 
     <style>
         * {
@@ -1509,6 +1510,27 @@
             opacity: 1;
             transform: scale(1);
         }
+
+        /* Indian Flag Glow Animation */
+        .feature-card.india-card {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.5s ease;
+        }
+
+        .feature-card.india-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow:
+                0 -5px 20px rgba(255, 153, 51, 0.4),
+                /* Saffron (Top) */
+                0 0 20px rgba(255, 255, 255, 0.4),
+                /* White (Middle glow) */
+                0 5px 20px rgba(19, 136, 8, 0.4);
+            /* Green (Bottom) */
+            border-image: linear-gradient(180deg, #FF9933 0%, #FFFFFF 50%, #138808 100%);
+            border-image-slice: 1;
+        }
     </style>
 </head>
 
@@ -1551,7 +1573,8 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <img src="assets/neuro-logo.png" alt="Neuro Nest Kids" class="logo-img">
+                <img src="assets/neuro-logo.png" alt="Neuro Nest Kids - India To Globe" class="logo-img"
+                    style="height: 80px; width: auto;">
             </div>
             <ul class="nav">
                 <li><a href="#home">Home</a></li>
@@ -1591,7 +1614,7 @@
 
                 <!-- Image Column -->
                 <div class="hero-image-wrapper">
-                    <img src="assets/hero-kids.jpg" alt="Happy Kids" class="hero-image">
+                    <img src="assets/feeding-toddler.jpg" alt="Mom helping son" class="hero-image">
                 </div>
             </div>
         </div>
@@ -1690,7 +1713,29 @@
             <div class="section-header">
                 <h2 class="section-title">Why Neuro Nest Kids?</h2>
                 <p class="section-subtitle">What makes us different</p>
+
+                <!-- Made in India - Standalone Card with Pinned Flag Badge -->
+                <div style="margin-top: 60px; display: flex; justify-content: center;">
+                    <div class="feature-card india-card-special">
+                        <!-- Indian Flag Pin Badge -->
+                        <div class="flag-pin">
+                            <div class="flag-pin-stick"></div>
+                            <div class="flag-pin-badge">
+                                <div class="flag-stripe-pin saffron"></div>
+                                <div class="flag-stripe-pin white">
+                                    <div class="ashoka-chakra-pin">☸</div>
+                                </div>
+                                <div class="flag-stripe-pin green"></div>
+                            </div>
+                        </div>
+
+                        <h3 style="font-size: 2rem; margin-bottom: 16px;">Made in India</h3>
+                        <p style="font-size: 1.1rem; max-width: 500px; margin: auto;">Proudly made in India for the
+                            neurodiverse children across the globe.</p>
+                    </div>
+                </div>
             </div>
+
 
             <div class="features-grid">
                 <div class="feature-card">
@@ -1710,9 +1755,14 @@
                     <p>Designed with sensory sensitivities in mind - smooth texture, mild taste, pleasant aroma.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔬</div>
-                    <h3>Science-Backed</h3>
-                    <p>Formulated by nutritionists and backed by research on neurodevelopmental nutrition.</p>
+                    <div class="feature-icon">
+                        <img src="assets/iso-22000-badge.png" alt="ISO 22000 Certified"
+                            style="width: 100px; height: 100px; object-fit: contain;">
+                    </div>
+                    <h3>ISO 22000 Certified</h3>
+                    <p>ISO 22000 is an international standard that ensures food products are manufactured, processed,
+                        and
+                        handled with the highest level of food safety.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">✅</div>
@@ -1736,22 +1786,28 @@
                 <p class="section-subtitle">The global impact and why we care</p>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">1 in 6</div>
-                    <div class="stat-label">Children affected by neurodevelopmental conditions globally</div>
+            <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center;">
+                <div class="reveal">
+                    <img src="assets/tired-student.jpg" alt="Challenges in traditional learning"
+                        style="width: 100%; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">15-20%</div>
-                    <div class="stat-label">Of Indian children show signs of neurodevelopmental diversity</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">1 in 100</div>
-                    <div class="stat-label">Children diagnosed with Autism Spectrum Disorder in India</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">5-7%</div>
-                    <div class="stat-label">Children globally diagnosed with ADHD</div>
+                <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="stat-card">
+                        <div class="stat-number">1 in 6</div>
+                        <div class="stat-label">Children affected by neurodevelopmental conditions globally</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">15-20%</div>
+                        <div class="stat-label">Of Indian children show signs of neurodevelopmental diversity</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1 in 100</div>
+                        <div class="stat-label">Children diagnosed with Autism Spectrum Disorder in India</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5-7%</div>
+                        <div class="stat-label">Children globally diagnosed with ADHD</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1791,7 +1847,7 @@
                 </div>
 
                 <div class="mission-image">
-                    <img src="assets/family-joy.jpg" alt="Happy Family">
+                    <img src="assets/calm-mood.jpg" alt="Learning Success">
                 </div>
             </div>
         </div>
@@ -1807,6 +1863,9 @@
 
             <div class="testimonials-grid">
                 <div class="testimonial-card">
+                    <img src="assets/mom-helping-son.jpg"
+                        style="width: 100%; height: 200px; object-fit: cover; border-radius: 16px; margin-bottom: 20px;"
+                        alt="Happy toddler eating">
                     <div class="testimonial-text">"My son is extremely picky with textures, but he absolutely loves the
                         SMART shake! It's been a game-changer for our morning routine."</div>
                     <div class="testimonial-author">
@@ -1818,6 +1877,9 @@
                     </div>
                 </div>
                 <div class="testimonial-card">
+                    <img src="assets/computer-learning.jpg"
+                        style="width: 100%; height: 200px; object-fit: cover; border-radius: 16px; margin-bottom: 20px;"
+                        alt="Happy focused kid">
                     <div class="testimonial-text">"We've seen a noticeable difference in his focus during homework time
                         since starting the FOCUS blend. Highly recommend!"</div>
                     <div class="testimonial-author">
@@ -1829,6 +1891,9 @@
                     </div>
                 </div>
                 <div class="testimonial-card">
+                    <img src="assets/mom-daughter-sofa.jpg"
+                        style="width: 100%; height: 200px; object-fit: cover; border-radius: 16px; margin-bottom: 20px;"
+                        alt="Calm moment">
                     <div class="testimonial-text">"Finally, a clean protein source that doesn't have hidden sugars or
                         nasties. The CALM blend really helps her wind down before bed."</div>
                     <div class="testimonial-author">
@@ -1902,9 +1967,8 @@
             <div class="footer-grid">
                 <div>
                     <div class="logo" style="margin-bottom: 24px; font-size: 1.5rem;">
-                        <img src="assets/neuro-logo.png" alt="Neuro Nest Kids" class="logo-img"
-                            style="width: 100px; height: 100px;">
-                        NEURO NEST KIDS
+                        <img src="assets/neuro-logo.png" alt="Neuro Nest Kids - India To Globe" class="logo-img"
+                    style="height: 80px; width: auto;">
                     </div>
                     <p>India's First Neurodiverse-Friendly Nutrition Brand for Growing Children.</p>
                 </div>
@@ -1949,13 +2013,28 @@
             </div>
             <div class="availability-cities">
                 <h3>We're currently available in:</h3>
-                <div class="cities-grid"
-                    style="grid-template-columns: repeat(2, 1fr); max-width: 600px; margin: 0 auto;">
-                    <div class="city-item">📍 Mumbai</div>
-                    <div class="city-item">📍 Delhi NCR</div>
-                    <div class="city-item">📍 Hyderabad</div>
-                    <div class="city-item">📍 Andhra Pradesh</div>
+
+                <!-- States Section -->
+                <div style="margin-bottom: 30px;">
+                    <h4 style="text-align: center; color: #667eea; margin-bottom: 16px; font-size: 1.2rem;">States</h4>
+                    <div class="cities-grid"
+                        style="grid-template-columns: repeat(2, 1fr); max-width: 600px; margin: 0 auto;">
+                        <div class="city-item">📍 Andhra Pradesh</div>
+                    </div>
                 </div>
+
+                <!-- Cities Section -->
+                <div>
+                    <h4 style="text-align: center; color: #667eea; margin-bottom: 16px; font-size: 1.2rem;">Major Cities
+                    </h4>
+                    <div class="cities-grid"
+                        style="grid-template-columns: repeat(3, 1fr); max-width: 700px; margin: 0 auto;">
+                        <div class="city-item">📍 Mumbai</div>
+                        <div class="city-item">📍 Delhi NCR</div>
+                        <div class="city-item">📍 Hyderabad</div>
+                    </div>
+                </div>
+
                 <p style="margin-top: 24px; color: #718096; text-align: center;">Expanding to more cities soon!</p>
             </div>
         </div>
@@ -2001,21 +2080,21 @@
                 image: 'assets/product-smart.png',
                 desc: 'Everyday balanced nutrition to support overall growth and cognitive development. Packed with essential vitamins, minerals, and nutrients that growing children need.',
                 benefits: ['Supports cognitive function and brain development', 'Boosts immune system naturally', 'Promotes healthy growth and development', 'Improves concentration and focus'],
-                ingredients: ['Protein Complex', 'DHA & Omega-3', 'Vitamins A, C, D, E', 'Calcium & Iron', 'Zinc & Magnesium']
+                ingredients: ['DHA & Omega-3', 'Iron', 'Zinc & Magnesium', "Vitamin D3"]
             },
             'CALM': {
                 name: 'CALM', badge: 'For Neurodiverse Kids', price: 950,
                 image: 'assets/product-calm.png',
                 desc: 'Sensory-friendly nutrition designed to settle and soothe, promoting relaxation and emotional balance. Specially formulated for children with sensory sensitivities.',
                 benefits: ['Promotes relaxation and calmness', 'Supports digestive health', 'Sensory-friendly texture and taste', 'Reduces anxiety and stress naturally'],
-                ingredients: ['Chamomile Extract', 'Magnesium', 'Probiotics', 'L-Theanine', 'Vitamin B Complex']
+                ingredients: ['Calcium ', 'Magnesium', 'Probiotics', 'L-Theanine', 'Vitamin B6']
             },
             'FOCUS': {
                 name: 'FOCUS', badge: 'For Neurodiverse Kids', price: 950,
                 image: 'assets/product-focus.jpg',
                 desc: 'Specialized nutrients for steady energy and attention support throughout the day. Helps improve concentration and mental clarity without overstimulation.',
                 benefits: ['Provides sustained energy release', 'Enhances focus and concentration', 'Supports mood stabilization', 'Improves attention span naturally'],
-                ingredients: ['Iron', 'Zinc', 'Vitamin B12', 'Ginkgo Biloba', 'Phosphatidylserine']
+                ingredients: ['Iron', 'Zinc', 'Vitamin B12']
             }
         };
 
