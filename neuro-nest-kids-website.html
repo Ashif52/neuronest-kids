@@ -1,0 +1,2376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuro Nest Kids | Premium Nutrition for Growing Minds</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+        }
+
+        .nav {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav a:hover {
+            color: #667eea;
+        }
+
+        .cart-btn {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            position: relative;
+        }
+
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f5576c;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero-image-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 12px 32px;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+            animation: heroImageFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes heroImageFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-20px) scale(1.02);
+            }
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: #2d3748;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #718096;
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-start;
+        }
+
+        .btn {
+            padding: 18px 48px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-outline {
+            background: white;
+            border: 2px solid #e2e8f0;
+            color: #4a5568;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-outline:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .trust-strip {
+            display: flex;
+            gap: 32px;
+            justify-content: flex-start;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            padding: 12px 24px;
+            background: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Section */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+            color: #2d3748;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #718096;
+        }
+
+        /* Products */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .product-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .btn-view {
+            padding: 14px 32px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .btn-view {
+            transform: scale(1);
+        }
+
+        .product-info {
+            padding: 32px;
+        }
+
+        .product-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .product-name {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .product-desc {
+            color: #718096;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .product-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .highlight-tag {
+            padding: 8px 16px;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-add {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            background: white;
+            border-radius: 24px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: #2d3748;
+        }
+
+        .feature-card p {
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .stat-card {
+            padding: 48px 32px;
+            background: white;
+            border-radius: 24px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .stat-label {
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        /* Mission */
+        .mission-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .mission-text h2 {
+            font-size: 3rem;
+            margin-bottom: 24px;
+            color: #2d3748;
+        }
+
+        .mission-text p {
+            color: #718096;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+
+        .mission-highlights {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .highlight-item {
+            display: flex;
+            gap: 24px;
+            padding: 24px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .highlight-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .highlight-item h4 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        .highlight-item p {
+            font-size: 0.95rem;
+            margin: 0;
+            color: #718096;
+        }
+
+        .mission-image img {
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            padding: 80px 0 40px;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-grid h4 {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            color: #2d3748;
+        }
+
+        .footer-grid p,
+        .footer-grid a {
+            color: #718096;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-grid a:hover {
+            color: #667eea;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #e2e8f0;
+            color: #a0aec0;
+        }
+
+        /* Product Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 32px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.1);
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .modal-image-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 32px 0 0 32px;
+        }
+
+        .modal-image-section img {
+            width: 100%;
+            max-width: 350px;
+            object-fit: contain;
+        }
+
+        .modal-details {
+            padding: 60px 40px;
+        }
+
+        .modal-details h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            color: #2d3748;
+        }
+
+        .modal-details p {
+            color: #718096;
+            margin-bottom: 32px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .modal-section {
+            margin-bottom: 32px;
+        }
+
+        .modal-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            color: #2d3748;
+            font-weight: 700;
+        }
+
+        .benefit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .benefit-item span:first-child {
+            color: #48bb78;
+            font-size: 1.2rem;
+        }
+
+        .benefit-item span:last-child {
+            color: #4a5568;
+        }
+
+        .ingredient-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .ingredient-tag {
+            padding: 8px 16px;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 32px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .modal-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Notification */
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Splash Screen - Modern Redesign */
+        .splash-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease, transform 1s ease;
+            overflow: hidden;
+        }
+
+        /* Animated Wave Background */
+        .splash-screen::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle at 30% 50%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
+            animation: waveRotate 20s linear infinite;
+        }
+
+        @keyframes waveRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: scale(0.95);
+        }
+
+        /* Content Container */
+        .splash-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        /* Logo with Glow Effect */
+        .splash-logo-wrapper {
+            position: relative;
+            animation: logoFadeIn 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .splash-logo-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -30px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.4), transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.3;
+            }
+        }
+
+        .splash-logo-img {
+            width: 420px;
+            height: 420px;
+            object-fit: contain;
+            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.7)) brightness(1.2);
+        }
+
+        @keyframes logoFadeIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Brand Text */
+        .splash-brand {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 0%, #667eea 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            animation: textSlideUp 0.8s ease 0.5s backwards;
+        }
+
+        /* Tagline */
+        .splash-tagline {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: textSlideUp 0.8s ease 0.7s backwards;
+        }
+
+        @keyframes textSlideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Modern Progress Bar */
+        .splash-progress-container {
+            width: 320px;
+            animation: textSlideUp 0.8s ease 0.9s backwards;
+        }
+
+        .splash-progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+        }
+
+        .splash-progress-track {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .splash-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            border-radius: 10px;
+            animation: progressFill 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+            position: relative;
+        }
+
+        .splash-progress-bar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes progressFill {
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Loading Percentage */
+        .splash-percentage {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 700;
+        }
+
+        /* Floating Particles */
+        .splash-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .splash-particle:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .splash-particle:nth-child(2) {
+            top: 60%;
+            right: 30%;
+            animation: float 8s ease-in-out infinite 1s;
+        }
+
+        .splash-particle:nth-child(3) {
+            bottom: 30%;
+            left: 40%;
+            animation: float 7s ease-in-out infinite 2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: translate(20px, -20px);
+                opacity: 0.8;
+            }
+        }
+
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+
+            .products-grid,
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mission-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .modal-image-section {
+                border-radius: 32px 32px 0 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* World Map in Footer */
+        .world-map-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .world-map-container:hover {
+            transform: scale(1.05);
+        }
+
+        .world-map {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .world-map-container:hover .world-map {
+            opacity: 1;
+        }
+
+        .map-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: mapPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes mapPulse {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.3;
+            }
+        }
+
+        /* Availability Modal */
+        .availability-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .availability-modal.active {
+            display: flex;
+        }
+
+        .availability-content {
+            background: white;
+            border-radius: 32px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 60px 40px;
+            position: relative;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
+        }
+
+        .availability-content h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .india-map-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .india-map {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
+        }
+
+        .availability-cities {
+            margin-top: 40px;
+        }
+
+        .availability-cities h3 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: #2d3748;
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .city-item {
+            padding: 16px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 600;
+            color: #4a5568;
+            transition: all 0.3s;
+        }
+
+        .city-item:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .cities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .availability-content {
+                padding: 40px 20px;
+            }
+        }
+
+        /* Floating Message Widget */
+        .message-float-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .message-float-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.5);
+        }
+
+        .message-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s;
+        }
+
+        .message-panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .message-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .message-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #2d3748;
+        }
+
+        .message-header button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #a0aec0;
+            transition: color 0.3s;
+        }
+
+        .message-header button:hover {
+            color: #2d3748;
+        }
+
+        .message-body {
+            padding: 20px;
+        }
+
+        .message-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .message-option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .message-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .message-option strong {
+            display: block;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .message-option p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #718096;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 32px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e0e7ff, #e9d8fd);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            color: #2d3748;
+            margin-bottom: 2px;
+        }
+
+        .author-info p {
+            font-size: 0.85rem;
+            color: #718096;
+            margin: 0;
+        }
+
+        /* FAQ Section */
+        .faq-max-width {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-question {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.1rem;
+        }
+
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+            color: #667eea;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 24px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 24px 24px 24px;
+            max-height: 200px;
+            /* Adjust based on content */
+        }
+
+        @media (max-width: 768px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div id="splashScreen" class="splash-screen">
+        <!-- Floating Particles -->
+        <div class="splash-particle"></div>
+        <div class="splash-particle"></div>
+        <div class="splash-particle"></div>
+
+        <div class="splash-content">
+            <!-- Logo -->
+            <div class="splash-logo-wrapper">
+                <img src="assets/neuro-logo.png" alt="Neuro Nest Kids" class="splash-logo-img">
+            </div>
+
+            <!-- Brand Name -->
+            <div class="splash-brand">NEURO NEST KIDS</div>
+
+            <!-- Tagline -->
+            <div class="splash-tagline">Nutrition for Great Minds</div>
+
+            <!-- Progress Bar -->
+            <div class="splash-progress-container">
+                <div class="splash-progress-label">
+                </div>
+                <div class="splash-progress-track">
+                    <div class="splash-progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/neuro-logo.png" alt="Neuro Nest Kids" class="logo-img">
+            </div>
+            <ul class="nav">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#why">Why Us</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <button class="cart-btn" onclick="window.location.href='cart.html'">
+                🛒 Cart
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Text Column -->
+                <div class="hero-text">
+                    <div class="hero-badge">🧠 India's First Neurodiverse-Friendly Nutrition</div>
+                    <h1 class="hero-title">Nutrition Designed for<br><span class="gradient-text">Growing Minds</span>
+                    </h1>
+                    <p class="hero-subtitle">Specialized, sensory-friendly nutrition for children with ADHD, Autism, and
+                        other neurodevelopmental needs. Clean label, science-backed, and loved by kids.</p>
+                    <div class="hero-buttons">
+                        <a href="#products" class="btn btn-primary">Explore Products</a>
+                        <a href="#about" class="btn btn-outline">Learn More</a>
+                    </div>
+                    <div class="trust-strip">
+                        <div class="trust-item">✓ FSSAI Certified</div>
+                        <div class="trust-item">✓ No Artificial Colors</div>
+                        <div class="trust-item">✓ Sensory Friendly</div>
+                        <div class="trust-item">✓ Nutritionist Approved</div>
+                    </div>
+                </div>
+
+                <!-- Image Column -->
+                <div class="hero-image-wrapper">
+                    <img src="assets/hero-kids.jpg" alt="Happy Kids" class="hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Product Range</h2>
+                <p class="section-subtitle">Three specialized formulas designed for different needs</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="assets/product-smart.png" alt="SMART" class="product-image">
+                        <div class="product-overlay">
+                            <button class="btn-view" onclick="showProductModal('SMART')">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-badge">For All Growing Kids</div>
+                        <h3 class="product-name">SMART</h3>
+                        <p class="product-desc">Everyday balanced nutrition to support overall growth and cognitive
+                            development.</p>
+                        <div class="product-highlights">
+                            <span class="highlight-tag">🧠 Cognitive Support</span>
+                            <span class="highlight-tag">💪 Immunity Boost</span>
+                            <span class="highlight-tag">📈 Balanced Growth</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">₹950</div>
+                            <button class="btn-add" onclick="addToCart('SMART', 950, 'assets/product-smart.png')">Add to
+                                Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="assets/product-calm.png" alt="CALM" class="product-image">
+                        <div class="product-overlay">
+                            <button class="btn-view" onclick="showProductModal('CALM')">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-badge">For Neurodiverse Kids</div>
+                        <h3 class="product-name">CALM</h3>
+                        <p class="product-desc">Sensory-friendly nutrition designed to settle and soothe, promoting
+                            relaxation.</p>
+                        <div class="product-highlights">
+                            <span class="highlight-tag">🌸 Promotes Calm</span>
+                            <span class="highlight-tag">🌿 Digestive Health</span>
+                            <span class="highlight-tag">😉 Sensory Friendly</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">₹950</div>
+                            <button class="btn-add" onclick="addToCart('CALM', 950, 'assets/product-calm.png')">Add to
+                                Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="assets/product-focus.jpg" alt="FOCUS" class="product-image">
+                        <div class="product-overlay">
+                            <button class="btn-view" onclick="showProductModal('FOCUS')">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-badge">For Neurodiverse Kids</div>
+                        <h3 class="product-name">FOCUS</h3>
+                        <p class="product-desc">Specialized nutrients for steady energy and attention support throughout
+                            the day.</p>
+                        <div class="product-highlights">
+                            <span class="highlight-tag">⚡ Sustained Energy</span>
+                            <span class="highlight-tag">🎯 Focus Enhancement</span>
+                            <span class="highlight-tag">😊 Mood Balance</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">₹950</div>
+                            <button class="btn-add" onclick="addToCart('FOCUS', 950, 'assets/product-focus.jpg')">Add
+                                to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us -->
+    <section id="why" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Neuro Nest Kids?</h2>
+                <p class="section-subtitle">What makes us different</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Neurodiverse-Focused</h3>
+                    <p>Specifically formulated for children with ADHD, Autism, and other neurodevelopmental conditions.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h3>Clean Label</h3>
+                    <p>No artificial colors, flavors, or preservatives. Only natural, wholesome ingredients.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👂</div>
+                    <h3>Sensory Friendly</h3>
+                    <p>Designed with sensory sensitivities in mind - smooth texture, mild taste, pleasant aroma.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔬</div>
+                    <h3>Science-Backed</h3>
+                    <p>Formulated by nutritionists and backed by research on neurodevelopmental nutrition.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>FSSAI Certified</h3>
+                    <p>Fully compliant with Indian food safety standards and regulations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Parent Approved</h3>
+                    <p>Created by parents who understand the unique challenges of raising neurodiverse children.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Understanding Neurodiversity</h2>
+                <p class="section-subtitle">The global impact and why we care</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1 in 6</div>
+                    <div class="stat-label">Children affected by neurodevelopmental conditions globally</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15-20%</div>
+                    <div class="stat-label">Of Indian children show signs of neurodevelopmental diversity</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1 in 100</div>
+                    <div class="stat-label">Children diagnosed with Autism Spectrum Disorder in India</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5-7%</div>
+                    <div class="stat-label">Children globally diagnosed with ADHD</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="section">
+        <div class="container">
+            <div class="mission-content">
+                <div class="mission-text">
+                    <h2>Who We Are</h2>
+                    <p>Neuro Nest Kids is India's pioneering nutrition brand dedicated exclusively to supporting
+                        neurodiverse children. Founded by parents and nutritionists who understand the unique challenges
+                        faced by these children, we're committed to making a real difference.</p>
+                    <p>We believe every child deserves access to nutrition that supports their unique neurological
+                        makeup, without compromise on quality, taste, or sensory experience.</p>
+
+                    <div class="mission-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">🎯</div>
+                            <div>
+                                <h4>Our Goal</h4>
+                                <p>To provide specialized, sensory-friendly nutrition to 100,000 neurodiverse children
+                                    across India by 2027.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">🤝</div>
+                            <div>
+                                <h4>Why We Help</h4>
+                                <p>Many neurodiverse children struggle with nutrition due to sensory sensitivities,
+                                    limited food acceptance, and specific nutritional needs that standard products don't
+                                    address.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mission-image">
+                    <img src="assets/family-joy.jpg" alt="Happy Family">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" style="background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Parents Love Us</h2>
+                <p class="section-subtitle">Real stories from real parents</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"My son is extremely picky with textures, but he absolutely loves the
+                        SMART shake! It's been a game-changer for our morning routine."</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">P</div>
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Mom of 6-year-old</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"We've seen a noticeable difference in his focus during homework time
+                        since starting the FOCUS blend. Highly recommend!"</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div class="author-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>Dad of 9-year-old with ADHD</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Finally, a clean protein source that doesn't have hidden sugars or
+                        nasties. The CALM blend really helps her wind down before bed."</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div class="author-info">
+                            <h4>Sarah D'Souza</h4>
+                            <p>Mom of 5-year-old</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Common questions from parents</p>
+            </div>
+
+            <div class="faq-max-width">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Is this safe for daily consumption?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, absolutely! All our products are formulated by nutritionists and are FSSAI certified. They
+                        are designed for safe, daily consumption as part of a balanced diet.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What is the recommended age?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Our products are generally recommended for children ages 4 to 12. For children under 4 or with
+                        specific medical conditions, we always recommend consulting with your pediatrician first.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        How do I prepare the drinks?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        It's super easy! Just mix one scoop with 200ml of water or milk (dairy or plant-based). Shake or
+                        blend until smooth. You can also mix it into smoothies, yogurt, or oatmeal!
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Are there any artificial sweeteners?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Never. We use only natural sweeteners like Stevia or Monk Fruit, and natural flavors. We are
+                        strictly 100% clean label—no hidden nasties, ever.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo" style="margin-bottom: 24px; font-size: 1.5rem;">
+                        <img src="assets/neuro-logo.png" alt="Neuro Nest Kids" class="logo-img"
+                            style="width: 100px; height: 100px;">
+                        NEURO NEST KIDS
+                    </div>
+                    <p>India's First Neurodiverse-Friendly Nutrition Brand for Growing Children.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <a href="#products">Products</a>
+                    <a href="#why">Why Us</a>
+                    <a href="#about">About</a>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <a href="mailto:hello@neuronestkids.com">hello@neuronestkids.com</a>
+                    <a href="tel:+918888888888">+91 88888 88888</a>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <a href="#" target="_blank">Instagram</a>
+                    <a href="#" target="_blank">Facebook</a>
+                    <a href="#" target="_blank">Twitter</a>
+                </div>
+                <div>
+                    <h4>Our Presence</h4>
+                    <div class="world-map-container" onclick="showAvailabilityMap()">
+                        <img src="assets/world-map.png" alt="World Map" class="world-map">
+                        <div class="map-pulse"></div>
+                        <p style="margin-top: 12px; font-size: 0.9rem; color: #667eea; cursor: pointer;">Click to see
+                            availability</p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">&copy; 2024 Neuro Nest Kids. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- India Availability Modal -->
+    <div id="availabilityModal" class="availability-modal">
+        <div class="availability-content">
+            <button class="modal-close" onclick="closeAvailabilityMap()">&times;</button>
+            <h2>Available Across India</h2>
+            <div class="india-map-wrapper">
+                <img src="assets/india-map-green-dots.png" alt="India Map" class="india-map">
+            </div>
+            <div class="availability-cities">
+                <h3>We're currently available in:</h3>
+                <div class="cities-grid"
+                    style="grid-template-columns: repeat(2, 1fr); max-width: 600px; margin: 0 auto;">
+                    <div class="city-item">📍 Mumbai</div>
+                    <div class="city-item">📍 Delhi NCR</div>
+                    <div class="city-item">📍 Hyderabad</div>
+                    <div class="city-item">📍 Andhra Pradesh</div>
+                </div>
+                <p style="margin-top: 24px; color: #718096; text-align: center;">Expanding to more cities soon!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-grid">
+                <div class="modal-image-section">
+                    <img id="modalImage" src="" alt="">
+                </div>
+                <div class="modal-details">
+                    <div id="modalBadge" class="product-badge"></div>
+                    <h2 id="modalName"></h2>
+                    <p id="modalDesc"></p>
+
+                    <div class="modal-section">
+                        <h3>Key Benefits</h3>
+                        <div id="modalBenefits" class="benefit-list"></div>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>Key Ingredients</h3>
+                        <div id="modalIngredients" class="ingredient-tags"></div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div id="modalPrice" class="modal-price"></div>
+                        <button id="modalAddBtn" class="btn btn-primary" style="padding: 16px 40px;">Add to
+                            Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = {
+            'SMART': {
+                name: 'SMART', badge: 'For All Growing Kids', price: 950,
+                image: 'assets/product-smart.png',
+                desc: 'Everyday balanced nutrition to support overall growth and cognitive development. Packed with essential vitamins, minerals, and nutrients that growing children need.',
+                benefits: ['Supports cognitive function and brain development', 'Boosts immune system naturally', 'Promotes healthy growth and development', 'Improves concentration and focus'],
+                ingredients: ['Protein Complex', 'DHA & Omega-3', 'Vitamins A, C, D, E', 'Calcium & Iron', 'Zinc & Magnesium']
+            },
+            'CALM': {
+                name: 'CALM', badge: 'For Neurodiverse Kids', price: 950,
+                image: 'assets/product-calm.png',
+                desc: 'Sensory-friendly nutrition designed to settle and soothe, promoting relaxation and emotional balance. Specially formulated for children with sensory sensitivities.',
+                benefits: ['Promotes relaxation and calmness', 'Supports digestive health', 'Sensory-friendly texture and taste', 'Reduces anxiety and stress naturally'],
+                ingredients: ['Chamomile Extract', 'Magnesium', 'Probiotics', 'L-Theanine', 'Vitamin B Complex']
+            },
+            'FOCUS': {
+                name: 'FOCUS', badge: 'For Neurodiverse Kids', price: 950,
+                image: 'assets/product-focus.jpg',
+                desc: 'Specialized nutrients for steady energy and attention support throughout the day. Helps improve concentration and mental clarity without overstimulation.',
+                benefits: ['Provides sustained energy release', 'Enhances focus and concentration', 'Supports mood stabilization', 'Improves attention span naturally'],
+                ingredients: ['Iron', 'Zinc', 'Vitamin B12', 'Ginkgo Biloba', 'Phosphatidylserine']
+            }
+        };
+
+        let currentProduct = null;
+
+        function showProductModal(productName) {
+            const product = products[productName];
+            if (!product) return;
+            currentProduct = product;
+
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalBadge').textContent = product.badge;
+            document.getElementById('modalName').textContent = product.name;
+            document.getElementById('modalDesc').textContent = product.desc;
+            document.getElementById('modalPrice').textContent = '₹' + product.price.toLocaleString();
+
+            document.getElementById('modalBenefits').innerHTML = product.benefits.map(b =>
+                `<div class="benefit-item"><span>✓</span><span>${b}</span></div>`
+            ).join('');
+
+            document.getElementById('modalIngredients').innerHTML = product.ingredients.map(i =>
+                `<span class="ingredient-tag">${i}</span>`
+            ).join('');
+
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('modalAddBtn').addEventListener('click', function () {
+            if (currentProduct) {
+                addToCart(currentProduct.name, currentProduct.price, currentProduct.image);
+                closeModal();
+            }
+        });
+
+        document.getElementById('productModal').addEventListener('click', function (e) {
+            if (e.target === this) closeModal();
+        });
+
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, image, quantity: 1 });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification(`${name} added to cart!`);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = 'position: fixed; top: 100px; right: 40px; background: linear-gradient(135deg, #48bb78, #38a169); color: white; padding: 16px 32px; border-radius: 50px; box-shadow: 0 10px 40px rgba(72, 187, 120, 0.4); z-index: 10000; font-weight: 600; animation: slideIn 0.3s ease;';
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Splash screen - runs every time
+        window.addEventListener('load', function () {
+            const splashScreen = document.getElementById('splashScreen');
+            setTimeout(function () {
+                splashScreen.classList.add('hidden');
+                // Extra safety: remove from DOM after transition
+                setTimeout(function () {
+                    splashScreen.style.display = 'none';
+                }, 1000);
+            }, 2500); // Show for 2.5 seconds
+        });
+
+        updateCartCount();
+
+        // Message widget functions
+        function toggleMessageWidget() {
+            const panel = document.getElementById('messagePanel');
+            panel.classList.toggle('active');
+        }
+
+        function openWhatsApp() {
+            window.open('https://wa.me/918888888888', '_blank');
+        }
+
+        // Availability Map functions
+        function showAvailabilityMap() {
+            document.getElementById('availabilityModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAvailabilityMap() {
+            document.getElementById('availabilityModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close on outside click
+        document.getElementById('availabilityModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeAvailabilityMap();
+            }
+        });
+
+        // ========== SCROLL ANIMATIONS ==========
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.product-card, .feature-card, .stat-card, .section-header').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add animate-in class styles dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            .animate-in {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ========== PARALLAX HERO IMAGE ==========
+        const heroImage = document.querySelector('.hero-image');
+        if (heroImage) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                if (scrolled < window.innerHeight) {
+                    heroImage.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            });
+        }
+
+        // ========== ANIMATED COUNTERS FOR STATS ==========
+        const animateCounter = (element, target) => {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 20);
+        };
+
+        // Observe stat numbers
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    const text = entry.target.textContent;
+                    const numbers = text.match(/\d+/g);
+                    if (numbers) {
+                        entry.target.dataset.animated = 'true';
+                        // Just add a pulse animation instead of counter
+                        entry.target.style.animation = 'pulse 0.5s ease';
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            statObserver.observe(stat);
+        });
+
+        // ========== PRODUCT CARDS STAGGER ANIMATION ==========
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // ========== SMOOTH SCROLL FOR NAVIGATION ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // ========== HEADER SCROLL EFFECT ==========
+        const header = document.querySelector('.header');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+                header.style.padding = '15px 0';
+            } else {
+                header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.05)';
+                header.style.padding = '20px 0';
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // ========== MOUSE FOLLOW GRADIENT ==========
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Add animated background gradient that follows mouse
+        const animatedBg = document.createElement('div');
+        animatedBg.style.cssText = `
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            transition: transform 0.3s ease;
+        `;
+        document.body.appendChild(animatedBg);
+
+        setInterval(() => {
+            animatedBg.style.transform = `translate(${mouseX - 300}px, ${mouseY - 300}px)`;
+        }, 100);
+
+        // ========== TRUST STRIP ANIMATION ==========
+        const trustItems = document.querySelectorAll('.trust-item');
+        trustItems.forEach((item, index) => {
+            item.style.animation = `fadeInUp 0.5s ease ${index * 0.1}s backwards`;
+        });
+
+        // Add fadeInUp keyframe
+        const animStyle = document.createElement('style');
+        animStyle.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+        `;
+        document.head.appendChild(animStyle);
+
+        // ========== TILT EFFECT FOR CARDS ==========
+        document.querySelectorAll('.product-card, .feature-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                card.style.transition = 'transform 0.1s ease';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                card.style.transition = 'transform 0.5s ease';
+            });
+        });
+
+        // ========== FAQ TOGGLE ==========
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+
+            // Open clicked if not previously active
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+    </script>
+
+    <!-- Floating Message Widget -->
+    <button class="message-float-btn" onclick="toggleMessageWidget()">💬</button>
+
+    <div class="message-panel" id="messagePanel">
+        <div class="message-header">
+            <h3>How can we help?</h3>
+            <button onclick="toggleMessageWidget()" style="font-size: 1.5rem; line-height: 1;">×</button>
+        </div>
+        <div class="message-body">
+            <div class="message-option" onclick="openWhatsApp()">
+                <span class="message-icon" style="background: #25D366; color: white;">📱</span>
+                <div>
+                    <strong>WhatsApp</strong>
+                    <p>Chat with us instantly</p>
+                </div>
+            </div>
+            <div class="message-option" onclick="window.location.href='mailto:hello@neuronestkids.com'">
+                <span class="message-icon" style="background: #f0e6ff; color: #667eea;">✉️</span>
+                <div>
+                    <strong>Email</strong>
+                    <p>hello@neuronestkids.com</p>
+                </div>
+            </div>
+            <div class="message-option" onclick="window.location.href='tel:+918888888888'">
+                <span class="message-icon" style="background: #e6f7ed; color: #48bb78;">📞</span>
+                <div>
+                    <strong>Call</strong>
+                    <p>+91 88888 88888</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

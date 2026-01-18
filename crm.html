@@ -1,0 +1,2378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Neuro Nest Kids – CRM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+
+  <style>
+    :root {
+      --primary: #AE9ECD;
+      --secondary: #35A9A9;
+      --accent: #FFCD54;
+      --bg: #f7f9fc;
+      --white: #fff;
+      --text: #2b2b2b;
+      --border: #e5e9f2;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Inter, system-ui
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text)
+    }
+
+    .sidebar {
+      width: 260px;
+      height: 100vh;
+      position: fixed;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      padding: 20px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar-footer .note {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      color: white;
+      text-decoration: none;
+      transition: .25s
+    }
+
+    .sidebar a:hover {
+      background: rgba(255, 255, 255, .2)
+    }
+
+    .topbar {
+      position: fixed;
+      left: 260px;
+      right: 0;
+      top: 0;
+      height: 70px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      z-index: 10
+    }
+
+    .main {
+      margin-left: 260px;
+      padding: 100px 30px 30px
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
+      animation: fade .3s ease
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr)
+    }
+
+    .grid-2 {
+      grid-template-columns: 2fr 1fr
+    }
+
+    .kpi {
+      font-size: 28px;
+      font-weight: 700
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    .table th,
+    .table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      font-size: 14px
+    }
+
+    .table th {
+      background: #fafbfe;
+      position: sticky;
+      top: 0
+    }
+
+    .badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px
+    }
+
+    .calm {
+      background: #ede8f7;
+      color: #5a4aa8
+    }
+
+    .focus {
+      background: #e0f4f4;
+      color: #1c7c7c
+    }
+
+    .smart {
+      background: #fff2cc;
+      color: #8a6d1d
+    }
+
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: white;
+      cursor: pointer
+    }
+
+    input,
+    select {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border)
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(10px)
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    /* Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: var(--secondary);
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px var(--secondary);
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    /* Schema Tooltip */
+    .schema-tooltip {
+      position: fixed;
+      background: rgba(30, 30, 30, 0.95);
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      pointer-events: none;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      display: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(4px);
+    }
+
+    .schema-tooltip h4 {
+      margin: 0 0 8px 0;
+      color: var(--accent);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 4px;
+    }
+
+    .schema-tooltip ul {
+      margin: 0;
+      padding-left: 15px;
+      list-style: square;
+    }
+
+    .schema-tooltip li {
+      margin-bottom: 2px;
+      color: #ddd;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div style="text-align:center;margin-bottom:20px">
+      <img src="assets/neuro-logo.png" style="width:180px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.1)">
+    </div>
+
+    <div class="sidebar-nav">
+      <a onclick="load('dashboard')"><i class="fa fa-chart-line" style="width:20px"></i> Dashboard</a>
+      <a onclick="load('leads')"><i class="fa fa-user-plus" style="width:20px"></i> Leads</a>
+      <a onclick="load('customers')"><i class="fa fa-users" style="width:20px"></i> Customers</a>
+      <a onclick="load('products')"><i class="fa fa-box" style="width:20px"></i> Products</a>
+      <a onclick="load('inventory')"><i class="fa fa-warehouse" style="width:20px"></i> Inventory</a>
+      <a onclick="load('orders')"><i class="fa fa-shopping-cart" style="width:20px"></i> Orders</a>
+    </div>
+
+    <div class="sidebar-footer">
+      <a onclick="load('schema')"><i class="fa fa-database" style="width:20px"></i> Database Schema</a>
+      <a onclick="load('settings')"><i class="fa fa-cog" style="width:20px"></i> Settings</a>
+      <div class="note">
+        Pre-alpha Build v0.4<br>
+        Neuro Nest Kids CRM
+      </div>
+    </div>
+  </div>
+
+  <div class="topbar">
+    <input placeholder="Search CRM..." style="width:300px">
+    <div>
+      <i class="fa fa-bell"></i>
+      &nbsp;&nbsp;
+      <i class="fa fa-user-circle"></i>
+    </div>
+  </div>
+
+  <div class="main" id="app"></div>
+
+  <script>
+    const app = document.getElementById("app")
+
+    function load(p) {
+      if (p === "dashboard") dashboard()
+      if (p === "leads") leads()
+      if (p === "customers") customers()
+      if (p === "products") products()
+      if (p === "inventory") inventory()
+      if (p === "orders") orders()
+      if (p === "settings") settings()
+      if (p === "schema") schema()
+    }
+
+
+    /* DASHBOARD */
+    /* DASHBOARD */
+    // Helper to format date for inputs
+    const todayStr = new Date().toISOString().slice(0, 10);
+    const lastMonthStr = new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 10);
+
+    function dashboard() {
+      // 1. Capture current filter state (if elements exist)
+      // Default to "All Time" (empty) or set a default range if preferred. 
+      // User asked for capability, but usually "All Time" is a good default or "This Month".
+      // Let's use the values if they exist, otherwise empty (All Time).
+      const dStart = document.getElementById("dashStart")?.value || "";
+      const dEnd = document.getElementById("dashEnd")?.value || "";
+
+      // 2. Filter Data
+      const fOrders = ordersData.filter(o => (!dStart || o.orderDate >= dStart) && (!dEnd || o.orderDate <= dEnd));
+      const fLeads = leadsData.filter(l => (!dStart || (l.created || "") >= dStart) && (!dEnd || (l.created || "") <= dEnd));
+      const fCustomers = customersData.filter(c => (!dStart || c.since >= dStart) && (!dEnd || c.since <= dEnd));
+
+      // 3. Render Shell
+      app.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <h1>Dashboard</h1>
+        <div style="display:flex;gap:10px">
+          <input type="date" id="dashStart" value="${dStart}" onchange="dashboard()">
+          <input type="date" id="dashEnd" value="${dEnd}" onchange="dashboard()">
+        </div>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="card"><div class="kpi">${fLeads.length}</div>New Leads</div>
+        <div class="card"><div class="kpi">${fCustomers.length}</div>New Customers</div>
+        <div class="card"><div class="kpi">₹${fOrders.reduce((s, o) => s + o.total, 0).toLocaleString()}</div>Revenue</div>
+        <div class="card"><div class="kpi">${productsData.filter(p => p.stock <= p.minStock).length}</div>Low Stock</div>
+      </div>
+      <br>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Sales Trend</h3>
+          <div style="height:300px;position:relative">
+            <canvas id="sales"></canvas>
+          </div>
+        </div>
+        <div class="card" id="funnel"></div>
+      </div>
+      <br>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Top Products</h3>
+          <div style="height:300px;position:relative">
+            <canvas id="topProducts"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Customer Happiness</h3>
+          <div style="height:300px;position:relative">
+            <canvas id="custReview"></canvas>
+          </div>
+        </div>
+      </div>
+      `;
+
+      // 4. Render Charts
+
+      // --- Sales Trend (Dynamic Aggregation) ---
+      // Aggregate by Month if range > 60 days, else by Day
+      const isLongRange = dStart && dEnd && (new Date(dEnd) - new Date(dStart)) / (1000 * 60 * 60 * 24) > 60;
+      const salesData = {};
+
+      fOrders.forEach(o => {
+        let key = o.orderDate; // default YYYY-MM-DD
+        if (isLongRange || (!dStart && !dEnd)) {
+          key = o.orderDate.slice(0, 7); // YYYY-MM
+        }
+        salesData[key] = (salesData[key] || 0) + o.total;
+      });
+
+      // Sort chronological
+      const sortedKeys = Object.keys(salesData).sort();
+
+      new Chart(document.getElementById("sales"), {
+        type: "line",
+        data: {
+          labels: sortedKeys,
+          datasets: [{
+            label: "Revenue (₹)",
+            data: sortedKeys.map(k => salesData[k]),
+            borderColor: "#35A9A9",
+            tension: 0.4,
+            fill: true,
+            backgroundColor: "rgba(53, 169, 169, 0.1)"
+          }]
+        },
+        options: { maintainAspectRatio: false }
+      });
+
+      // --- Funnel Chart ---
+      // We'll use the filtered counts
+      new ApexCharts(document.querySelector("#funnel"), {
+        chart: { type: "bar", height: 280 },
+        series: [{
+          name: "Count",
+          data: [
+            fLeads.length,
+            fLeads.filter(l => l.status === "Qualified").length,
+            fCustomers.length
+          ]
+        }],
+        xaxis: { categories: ["New Leads", "Qualified", "New Customers"] },
+        colors: ['#AE9ECD']
+      }).render();
+
+      // --- Top Products (Filtered) ---
+      const prodSales = {};
+      fOrders.forEach(o => {
+        o.items.forEach(i => {
+          prodSales[i.name] = (prodSales[i.name] || 0) + i.qty;
+        });
+      });
+      const topProds = Object.entries(prodSales).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+      new Chart(document.getElementById("topProducts"), {
+        type: "bar",
+        data: {
+          labels: topProds.map(p => p[0]),
+          datasets: [{
+            label: "Units Sold",
+            data: topProds.map(p => p[1]),
+            backgroundColor: "#FFCD54"
+          }]
+        },
+        options: { indexAxis: 'y', maintainAspectRatio: false }
+      });
+
+      // --- Reviews (Filtered by proxy of Customer Join Date) ---
+      // Note: Reviews don't have dates in the data model, so we filter by 'Customer Since' 
+      // or show all. Showing filtered by customer join date is a reasonable approximation
+      // for "reviews from customers acquired in this period".
+      const ratings = [0, 0, 0, 0, 0];
+      fCustomers.forEach(c => {
+        c.reviews.forEach(r => {
+          if (r.rating >= 1 && r.rating <= 5) ratings[r.rating - 1]++;
+        });
+      });
+
+      new Chart(document.getElementById("custReview"), {
+        type: "pie",
+        data: {
+          labels: ["1 Star", "2 Stars", "3 Stars", "4 Stars", "5 Stars"],
+          datasets: [{
+            data: ratings,
+            backgroundColor: ["#e74c3c", "#e67e22", "#f1c40f", "#3498db", "#2ecc71"]
+          }]
+        },
+        options: { maintainAspectRatio: false }
+      });
+    }
+
+
+    /* LEADS */
+    let leadsData = [
+      {
+        id: 1,
+        name: "Arjun Kumar",
+        phone: "9876543210",
+        email: "arjun@gmail.com",
+        source: "Website",
+        status: "New",
+        created: "2026-01-15",
+        followup: "2026-01-20",
+        notes: "Interested in CALM products",
+        address: "Chennai"
+      },
+      {
+        id: 2,
+        name: "Sara Khan",
+        phone: "9123456780",
+        email: "sara@gmail.com",
+        source: "Instagram",
+        status: "Contacted",
+        created: "2026-01-12",
+        followup: "2026-01-18",
+        notes: "Requested price details",
+        address: "Bangalore"
+      },
+      {
+        id: 3,
+        name: "Mike Ross",
+        phone: "9123456000",
+        email: "mike@gmail.com",
+        source: "Referral",
+        status: "Qualified",
+        created: "2026-01-10",
+        followup: "2026-01-25",
+        notes: "Wants bulk deal",
+        address: "Mumbai"
+      }
+    ];
+
+
+    function leads() {
+      renderLeads();
+      renderLeadCharts();
+    }
+
+    function renderLeads() {
+      const allLeads = leadsData;
+      const total = allLeads.length;
+      const newLeads = allLeads.filter(l => l.status === "New").length;
+      const qualified = allLeads.filter(l => l.status === "Qualified").length;
+      const converted = allLeads.filter(l => l.status === "Converted").length;
+
+      app.innerHTML = `
+ <h1>Leads Management</h1>
+
+ <div class="grid grid-4">
+  <div class="card"><div class="kpi">${total}</div>Total Leads</div>
+  <div class="card"><div class="kpi">${newLeads}</div>New Leads</div>
+  <div class="card"><div class="kpi">${qualified}</div>Qualified</div>
+  <div class="card"><div class="kpi">${converted}</div>Converted</div>
+ </div>
+
+ <br>
+
+ <div class="grid grid-2">
+  <div class="card">
+   <h3>Lead Sources</h3>
+   <canvas id="sourceChart" style="max-height:250px"></canvas>
+  </div>
+  <div class="card">
+   <h3>Lead Status</h3>
+   <canvas id="statusChart" style="max-height:250px"></canvas>
+  </div>
+ </div>
+
+ <br>
+
+ <div class="card">
+   <div style="display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap">
+     <input id="leadSearch" placeholder="Search name / phone / email" onkeyup="renderLeads()">
+     <select id="statusFilter" onchange="renderLeads()">
+       <option value="">All Status</option>
+       <option>New</option>
+       <option>Contacted</option>
+       <option>Qualified</option>
+       <option>Converted</option>
+       <option>Lost</option>
+     </select>
+     <select id="sourceFilter" onchange="renderLeads()">
+       <option value="">All Sources</option>
+       <option>Website</option>
+       <option>Instagram</option>
+       <option>Referral</option>
+       <option>Advertisement</option>
+       <option>Walk-in</option>
+     </select>
+     <input type="date" id="dateStart" onchange="renderLeads();renderLeadCharts()">
+     <input type="date" id="dateEnd" onchange="renderLeads();renderLeadCharts()">
+     <button onclick="openLeadForm()">+ Create Lead</button>
+   </div>
+
+   <table class="table">
+     <tr>
+       <th>Name</th>
+       <th>Date</th>
+       <th>Mobile</th>
+       <th>Source</th>
+       <th>Status</th>
+       <th>Actions</th>
+     </tr>
+     ${filteredLeads().map(l => `
+       <tr>
+         <td>
+           <b>${l.name}</b><br>
+           <span style="font-size:12px;color:#666">${l.email || ""}</span>
+         </td>
+         <td>${l.created || "-"}</td>
+         <td>
+           <a href="tel:${l.phone}">
+             <i class="fa fa-phone"></i> ${l.phone}
+           </a>
+         </td>
+         <td>${l.source}</td>
+         <td>
+           <select onchange="updateStatus(${l.id},this.value)" style="padding:4px">
+             ${["New", "Contacted", "Qualified", "Converted", "Lost"].map(s =>
+        `<option ${l.status === s ? "selected" : ""}>${s}</option>`).join("")}
+           </select>
+         </td>
+         <td>
+           <button onclick="editLead(${l.id})">Edit</button>
+           ${l.status !== "Converted"
+          ? `<button onclick="convertLead(${l.id})">Convert</button>`
+          : `<span style="color:green">✓ Customer</span>`}
+         </td>
+       </tr>
+     `).join("")}
+   </table>
+ </div>
+
+ ${leadFormModal()}
+ `;
+    }
+
+    function filteredLeads() {
+      const q = document.getElementById("leadSearch")?.value.toLowerCase() || "";
+      const s = document.getElementById("statusFilter")?.value || "";
+      const src = document.getElementById("sourceFilter")?.value || "";
+      const d1 = document.getElementById("dateStart")?.value;
+      const d2 = document.getElementById("dateEnd")?.value;
+
+      return leadsData.filter(l =>
+        (!q || l.name.toLowerCase().includes(q) || l.phone.includes(q) || (l.email || "").includes(q)) &&
+        (!s || l.status === s) &&
+        (!src || l.source === src) &&
+        (!d1 || l.created >= d1) &&
+        (!d2 || l.created <= d2)
+      );
+    }
+
+    function updateStatus(id, val) {
+      const lead = leadsData.find(l => l.id === id);
+      lead.status = val;
+      renderLeads();
+      renderLeadCharts();
+    }
+
+    function updateFollowup(id, val) {
+      leadsData.find(l => l.id === id).followup = val;
+    }
+
+    function deleteLead(id) {
+      if (confirm("Delete this lead?")) {
+        leadsData = leadsData.filter(l => l.id !== id);
+        renderLeads(); renderLeadCharts();
+      }
+    }
+
+    function convertLead(id) {
+      const lead = leadsData.find(l => l.id === id);
+      lead.status = "Converted";
+      alert("Lead converted to Customer");
+      renderLeads(); renderLeadCharts();
+    }
+
+    /* MODAL */
+    function openLeadForm(lead = null) {
+      document.getElementById("leadModal").style.display = "block";
+      if (lead) {
+        Object.keys(lead).forEach(k => {
+          const el = document.getElementById("lead_" + k);
+          if (el) el.value = lead[k];
+        });
+      }
+    }
+
+    function closeLeadForm() {
+      document.getElementById("leadModal").style.display = "none";
+    }
+
+    function saveLead() {
+      const l = {
+        id: Date.now(),
+        name: lead_name.value,
+        phone: lead_phone.value,
+        email: lead_email.value,
+        source: lead_source.value,
+        address: lead_address.value,
+        notes: lead_notes.value,
+        status: "New",
+        created: new Date().toISOString().slice(0, 10),
+        followup: ""
+      };
+      leadsData.push(l);
+      closeLeadForm(); renderLeads(); renderLeadCharts();
+    }
+
+    /* CHARTS */
+    function renderLeadCharts() {
+      const visibleLeads = filteredLeads();
+
+      // Source Chart
+      const sources = {};
+      visibleLeads.forEach(l => sources[l.source] = (sources[l.source] || 0) + 1);
+
+      new Chart(document.getElementById("sourceChart"), {
+        type: "doughnut",
+        data: {
+          labels: Object.keys(sources),
+          datasets: [{
+            data: Object.values(sources),
+            backgroundColor: ["#AE9ECD", "#35A9A9", "#FFCD54", "#95a5a6", "#f39c12"]
+          }]
+        },
+        options: { maintainAspectRatio: false }
+      });
+
+      // Status Chart
+      const statuses = {};
+      visibleLeads.forEach(l => statuses[l.status] = (statuses[l.status] || 0) + 1);
+
+      new Chart(document.getElementById("statusChart"), {
+        type: "bar",
+        data: {
+          labels: Object.keys(statuses),
+          datasets: [{
+            label: "Leads",
+            data: Object.values(statuses),
+            backgroundColor: "#35A9A9"
+          }]
+        },
+        options: { maintainAspectRatio: false }
+      });
+    }
+
+    function leadFormModal() {
+      return `
+<div id="leadModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4)">
+ <div class="card" style="max-width:500px;margin:10% auto">
+ <h3>Create Lead</h3>
+ <input id="lead_name" placeholder="Name" required><br><br>
+ <input id="lead_phone" placeholder="Mobile" required><br><br>
+ <input id="lead_email" placeholder="Email"><br><br>
+ <select id="lead_source">
+  <option>Website</option><option>Instagram</option>
+  <option>Referral</option><option>Advertisement</option><option>Walk-in</option>
+ </select><br><br>
+ <input id="lead_address" placeholder="Address"><br><br>
+ <textarea id="lead_notes" placeholder="Notes"></textarea><br><br>
+ <button onclick="saveLead()">Save</button>
+ <button onclick="closeLeadForm()" style="background:#999">Cancel</button>
+ </div>
+</div>
+`;
+    }
+    /* CUSTOMERS */
+    /* ---------------- CUSTOMER DATA ---------------- */
+
+    let customersData = [
+      {
+        id: 1,
+        name: "Arjun Kumar",
+        phone: "9876543210",
+        email: "arjun@gmail.com",
+        since: "2025-11-10",
+        orders: [
+          { id: "#NK1021", date: "2025-12-01", amount: 6200, status: "Delivered", category: "SMART" },
+          { id: "#NK1023", date: "2026-01-05", amount: 9800, status: "Delivered", category: "FOCUS" },
+          { id: "#NK1027", date: "2026-01-12", amount: 5200, status: "Processing", category: "CALM" }
+        ],
+        interactions: [
+          { date: "2026-01-08", type: "Call", note: "Discussed SMART range" },
+          { date: "2026-01-15", type: "WhatsApp", note: "Sent price list" }
+        ],
+        addresses: [
+          { type: "Shipping", label: "Home", address: "Chennai, Tamil Nadu" },
+          { type: "Billing", label: "Office", address: "Chennai, Tamil Nadu" }
+        ],
+        reviews: [
+          { product: "Brain Puzzle", rating: 5, comment: "Excellent quality and engaging" }
+        ]
+      },
+
+      {
+        id: 2,
+        name: "Priya Sharma",
+        phone: "9123456780",
+        email: "priya@gmail.com",
+        since: "2025-10-18",
+        orders: [
+          { id: "#NK1030", date: "2025-11-22", amount: 4500, status: "Delivered", category: "CALM" }
+        ],
+        interactions: [
+          { date: "2025-11-25", type: "Email", note: "Asked about bulk discount" }
+        ],
+        addresses: [
+          { type: "Shipping", label: "Home", address: "Bengaluru, Karnataka" }
+        ],
+        reviews: [
+          { product: "Mind Blocks", rating: 4, comment: "Good but delivery was slow" }
+        ]
+      },
+
+      {
+        id: 3,
+        name: "Rahul Verma",
+        phone: "9988776655",
+        email: "rahul@gmail.com",
+        since: "2025-09-05",
+        orders: [
+          { id: "#NK1035", date: "2025-12-10", amount: 7800, status: "Delivered", category: "FOCUS" }
+        ],
+        interactions: [
+          { date: "2025-12-12", type: "Call", note: "Requested invoice copy" }
+        ],
+        addresses: [
+          { type: "Shipping", label: "Home", address: "Delhi" }
+        ],
+        reviews: []
+      },
+
+      {
+        id: 4,
+        name: "Sneha Iyer",
+        phone: "9012345678",
+        email: "sneha@gmail.com",
+        since: "2025-08-20",
+        orders: [
+          { id: "#NK1040", date: "2025-09-01", amount: 3200, status: "Delivered", category: "SMART" },
+          { id: "#NK1046", date: "2026-01-02", amount: 5600, status: "Processing", category: "CALM" }
+        ],
+        interactions: [
+          { date: "2026-01-03", type: "WhatsApp", note: "Order status follow-up" }
+        ],
+        addresses: [
+          { type: "Shipping", label: "Home", address: "Coimbatore, Tamil Nadu" }
+        ],
+        reviews: [
+          { product: "Logic Cards", rating: 5, comment: "Perfect for kids" }
+        ]
+      },
+
+      {
+        id: 5,
+        name: "Amit Patel",
+        phone: "9090909090",
+        email: "amit@gmail.com",
+        since: "2025-07-14",
+        orders: [
+          { id: "#NK1051", date: "2025-10-11", amount: 11200, status: "Delivered", category: "FOCUS" }
+        ],
+        interactions: [
+          { date: "2025-10-15", type: "Email", note: "Interested in new arrivals" }
+        ],
+        addresses: [
+          { type: "Shipping", label: "Office", address: "Ahmedabad, Gujarat" }
+        ],
+        reviews: [
+          { product: "Focus Kit", rating: 4, comment: "Value for money" }
+        ]
+      },
+
+      {
+        id: 6,
+        name: "Neha Singh",
+        phone: "9345678901",
+        email: "neha@gmail.com",
+        since: "2025-11-01",
+        orders: [
+          { id: "#NK1058", date: "2025-11-20", amount: 2900, status: "Delivered", category: "CALM" }
+        ],
+        interactions: [
+          { date: "2025-11-21", type: "Call", note: "Asked usage instructions" }
+        ],
+        addresses: [
+          { type: "Shipping", label: "Home", address: "Lucknow, Uttar Pradesh" }
+        ],
+        reviews: [
+          { product: "Calm Board", rating: 5, comment: "Very relaxing" }
+        ]
+      },
+
+      {
+        id: 7,
+        name: "Vikram Rao",
+        phone: "9888123456",
+        email: "vikram@gmail.com",
+        since: "2025-06-09",
+        orders: [
+          { id: "#NK1062", date: "2025-08-19", amount: 6400, status: "Delivered", category: "SMART" }
+        ],
+        interactions: [],
+        addresses: [
+          { type: "Shipping", label: "Home", address: "Hyderabad, Telangana" }
+        ],
+        reviews: []
+      },
+
+      {
+        id: 8,
+        name: "Ananya Das",
+        phone: "9765432109",
+        email: "ananya@gmail.com",
+        since: "2025-12-03",
+        orders: [
+          { id: "#NK1069", date: "2026-01-10", amount: 8700, status: "Processing", category: "FOCUS" }
+        ],
+        interactions: [
+          { date: "2026-01-11", type: "WhatsApp", note: "Delivery timeline query" }
+        ],
+        addresses: [
+          { type: "Shipping", label: "Home", address: "Kolkata, West Bengal" }
+        ],
+        reviews: []
+      },
+
+      {
+        id: 9,
+        name: "Karan Mehta",
+        phone: "9654321870",
+        email: "karan@gmail.com",
+        since: "2025-05-22",
+        orders: [
+          { id: "#NK1073", date: "2025-06-15", amount: 5100, status: "Delivered", category: "CALM" }
+        ],
+        interactions: [],
+        addresses: [
+          { type: "Shipping", label: "Home", address: "Mumbai, Maharashtra" }
+        ],
+        reviews: [
+          { product: "Zen Puzzle", rating: 4, comment: "Nice design" }
+        ]
+      },
+
+      {
+        id: 10,
+        name: "Pooja Nair",
+        phone: "9876501234",
+        email: "pooja@gmail.com",
+        since: "2025-04-10",
+        orders: [
+          { id: "#NK1078", date: "2025-12-28", amount: 13400, status: "Delivered", category: "SMART" }
+        ],
+        interactions: [
+          { date: "2025-12-30", type: "Email", note: "Appreciated packaging" }
+        ],
+        addresses: [
+          { type: "Shipping", label: "Home", address: "Kochi, Kerala" }
+        ],
+        reviews: [
+          { product: "Smart Kit Pro", rating: 5, comment: "Highly recommended" }
+        ]
+      },
+
+      {
+        id: 11,
+        name: "Rohit Malhotra",
+        phone: "9001122334",
+        email: "rohit@gmail.com",
+        since: "2025-03-18",
+        orders: [
+          { id: "#NK1082", date: "2025-11-05", amount: 7600, status: "Delivered", category: "FOCUS" }
+        ],
+        interactions: [
+          { date: "2025-11-06", type: "Call", note: "Discussed warranty" }
+        ],
+        addresses: [
+          { type: "Shipping", label: "Office", address: "Gurgaon, Haryana" }
+        ],
+        reviews: []
+      }
+    ];
+
+
+    /* ---------------- CUSTOMERS LIST ---------------- */
+
+    function customers() {
+      app.innerHTML = `
+ <h1>Customers</h1>
+
+ <div class="card">
+  <div style="display:flex;justify-content:space-between;margin-bottom:15px">
+   <input id="custSearch" placeholder="Search name / phone / email" onkeyup="renderCustomerList()">
+   <button onclick="openCustomerForm()">+ Add Customer</button>
+  </div>
+
+  <table class="table">
+   <tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Orders</th>
+    <th>Total Spent</th>
+    <th>Action</th>
+   </tr>
+   ${customersData.map(c => {
+        const total = c.orders.reduce((s, o) => s + o.amount, 0);
+        return `
+     <tr>
+      <td>${c.name}</td>
+      <td><a href="tel:${c.phone}"><i class="fa fa-phone"></i> ${c.phone}</a></td>
+      <td>${c.email}</td>
+      <td>${c.orders.length}</td>
+      <td>₹${total.toLocaleString()}</td>
+      <td>
+       <button onclick="openCustomerDetail(${c.id})">View</button>
+       <button onclick="deleteCustomer(${c.id})" style="background:#e74c3c">Delete</button>
+      </td>
+     </tr>`;
+      }).join("")}
+  </table>
+ </div>
+ `;
+    }
+
+    /* ---------------- CUSTOMER DETAIL VIEW ---------------- */
+
+    function openCustomerDetail(id) {
+      const c = customersData.find(x => x.id === id);
+      const totalSpent = c.orders.reduce((s, o) => s + o.amount, 0);
+
+      app.innerHTML = `
+ <button onclick="customers()" style="margin-bottom:15px">← Back to Customers</button>
+
+ <div class="card">
+  <div style="display:flex;justify-content:space-between">
+   <div>
+    <h2>${c.name}</h2>
+    <p>
+     <a href="tel:${c.phone}"><i class="fa fa-phone"></i> ${c.phone}</a><br>
+     ${c.email}<br>
+     <b>Customer Since:</b> ${c.since}
+    </p>
+   </div>
+   <div>
+  <button onclick="openOrderModal(${c.id})">Place New Order</button>
+    <button onclick="openFollowupModal(${c.id})">Create Follow-up</button>
+    <button onclick="openAddressModal(${c.id})">Add Address</button>
+    </div>
+  </div>
+ </div>
+
+ <br>
+
+ <div class="grid grid-3">
+  <div class="card"><b>Total Orders</b><div class="kpi">${c.orders.length}</div></div>
+  <div class="card"><b>Total Spent</b><div class="kpi">₹${totalSpent}</div></div>
+  <div class="card"><b>Reviews</b><div class="kpi">${c.reviews.length}</div></div>
+ </div>
+
+ <br>
+
+ <div class="grid grid-2">
+  <div class="card">
+   <h3>Purchase History</h3>
+   ${c.orders.map(o => `
+    <p>📦 ${o.id} | ${o.date} | ₹${o.amount} | ${o.status}</p>
+   `).join("")}
+  </div>
+
+  <div class="card">
+   <canvas id="spendChart"></canvas>
+  </div>
+ </div>
+
+ <br>
+
+ <div class="grid grid-2">
+  <div class="card">
+   <canvas id="categoryChart"></canvas>
+  </div>
+  <div class="card">
+   <h3>Addresses</h3>
+   ${c.addresses.map(a => `
+    <p><b>${a.type}</b> (${a.label})<br>${a.address}</p>
+   `).join("")}
+  </div>
+ </div>
+
+ <br>
+
+ <div class="grid grid-2">
+  <div class="card">
+   <h3>Interactions</h3>
+   ${c.interactions.map(i => `
+    <p>${i.date} – <b>${i.type}</b><br>${i.note}</p>
+   `).join("")}
+  </div>
+
+  <div class="card">
+   <h3>Reviews</h3>
+   ${c.reviews.map(r => `
+    <p><b>${r.product}</b> ⭐${r.rating}<br>${r.comment}</p>
+   `).join("")}
+  </div>
+ </div>
+ `;
+
+      renderCustomerCharts(c);
+    }
+
+    /* ---------------- CHARTS ---------------- */
+
+    function renderCustomerCharts(c) {
+      new Chart(document.getElementById("spendChart"), {
+        type: "line",
+        data: {
+          labels: c.orders.map(o => o.date),
+          datasets: [{
+            label: "Spend",
+            data: c.orders.map(o => o.amount),
+            borderColor: "#35A9A9",
+            tension: .4
+          }]
+        }
+      });
+
+      const catCount = {};
+      c.orders.forEach(o => catCount[o.category] = (catCount[o.category] || 0) + 1);
+
+      new Chart(document.getElementById("categoryChart"), {
+        type: "bar",
+        data: {
+          labels: Object.keys(catCount),
+          datasets: [{
+            label: "Products Purchased",
+            data: Object.values(catCount),
+            backgroundColor: ["#AE9ECD", "#35A9A9", "#FFCD54"]
+          }]
+        }
+      });
+    }
+
+    /* ---------------- DELETE ---------------- */
+
+    function deleteCustomer(id) {
+      if (confirm("Delete this customer?")) {
+        customersData = customersData.filter(c => c.id !== id);
+        customers();
+      }
+    }
+    /* PRODUCTS */
+    /* ---------------- PRODUCT DATA ---------------- */
+
+    let productsData = [
+      {
+        id: 1,
+        name: "Calm",
+        sku: "CALM-001",
+        price: 950,
+        description: "Customizable description",
+        ingredients: {
+          Dominant: "Ingredient-4",
+          calories: 48,
+          protein: 10,
+          carbs: 20,
+          fat: 30
+        },
+        active: true,
+        stock: 4,
+        minStock: 5,
+        lastRestocked: "2026-01-05",
+        history: [
+          { date: "2026-01-05", type: "IN", qty: 10, note: "Initial stock" }
+        ]
+      },
+      {
+        id: 2,
+        name: "Focus",
+        sku: "FOCUS-002",
+        price: 950,
+        description: "Customizable description",
+        ingredients: {
+          Dominant: "Ingredient-2",
+          calories: 48,
+          protein: 10,
+          carbs: 20,
+          fat: 30
+        },
+        active: true,
+        stock: 90,
+        minStock: 5,
+        lastRestocked: "2026-01-05",
+        history: [
+          { date: "2026-01-05", type: "IN", qty: 10, note: "Initial stock" }
+        ]
+      },
+      {
+        id: 3,
+        name: "Smart",
+        sku: "SMART-003",
+        price: 950,
+        description: "Customizable description",
+        ingredients: {
+          Dominant: "Ingredient-1",
+          calories: 48,
+          protein: 10,
+          carbs: 20,
+          fat: 30
+        },
+        active: false,
+        stock: 0,
+        minStock: 5,
+        lastRestocked: "2026-01-05",
+        history: [
+          { date: "2026-01-05", type: "IN", qty: 10, note: "Initial stock" }
+        ]
+      }
+    ];
+    /* ================= ORDERS DATA ================= */
+
+    let ordersData = [];
+
+    // Generate 300 sample orders
+    function generateSampleOrders() {
+      const statuses = ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"];
+      const categories = ["CALM", "FOCUS", "SMART"];
+      const firstNames = ["Arjun", "Priya", "Rahul", "Sneha", "Amit", "Neha", "Vikram", "Ananya", "Karan", "Pooja", "Rohit", "Anjali", "Vikas", "Kavita", "Ramesh", "Sunita", "Deepak", "Meera", "Ajay", "Swati"];
+      const lastNames = ["Kumar", "Sharma", "Verma", "Iyer", "Patel", "Singh", "Rao", "Das", "Mehta", "Nair", "Malhotra", "Gupta", "Joshi", "Reddy", "Menon", "Chatterjee", "Kapoor", "Agarwal", "Shah", "Pillai"];
+
+      for (let i = 1; i <= 300; i++) {
+        const customerId = Math.floor(Math.random() * 11) + 1;
+        const customer = customersData.find(c => c.id === customerId);
+        const numItems = Math.floor(Math.random() * 3) + 1;
+        const items = [];
+
+        for (let j = 0; j < numItems; j++) {
+          const product = productsData[Math.floor(Math.random() * productsData.length)];
+          const qty = Math.floor(Math.random() * 3) + 1;
+          items.push({
+            productId: product.id,
+            name: product.name,
+            qty: qty,
+            unitPrice: product.price,
+            total: product.price * qty
+          });
+        }
+
+        const subtotal = items.reduce((s, i) => s + i.total, 0);
+        const orderDate = new Date(2025, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1).toISOString().slice(0, 10);
+
+        ordersData.push({
+          id: 1000 + i,
+          orderNo: "NK-ORD-" + (1000 + i),
+          customerId: customerId,
+          orderDate: orderDate,
+          status: statuses[Math.floor(Math.random() * statuses.length)],
+          items: items,
+          subtotal: subtotal,
+          tax: subtotal * 0.1,
+          shipping: 150,
+          total: subtotal * 1.1 + 150,
+          timeline: [{ status: "Confirmed", date: orderDate }]
+        });
+      }
+    }
+
+    // Initialize sample orders
+    generateSampleOrders();
+
+    // Helper function to get customer by ID
+    function getCustomer(customerId) {
+      return customersData.find(c => c.id === customerId) || { name: "Unknown" };
+    }
+
+    // Add order item function
+    function addOrderItem() {
+      const itemHtml = `
+    <div class="orderRow" style="display:flex;gap:10px;margin-bottom:10px">
+      <select class="prod">
+        ${productsData.map(p => `<option value="${p.id}">${p.name} - ₹${p.price}</option>`).join("")}
+      </select>
+      <input type="number" class="qty" placeholder="Qty" min="1" value="1">
+      <button onclick="this.parentElement.remove()">Remove</button>
+    </div>
+  `;
+      document.getElementById("orderItems").insertAdjacentHTML("beforeend", itemHtml);
+    }
+    /* ---------------- PRODUCTS PAGE ---------------- */
+
+    function products() {
+      renderProducts();
+    }
+
+    function renderProducts() {
+      app.innerHTML = `
+ <h1>Products</h1>
+
+ <div class="card">
+  <div style="display:flex;gap:10px;margin-bottom:15px">
+   <input id="prodSearch" placeholder="Search by name or SKU" onkeyup="renderProducts()">
+   <button onclick="openProductForm()">+ Add Product</button>
+  </div>
+
+  <table class="table">
+   <tr>
+    <th>Product</th>
+    <th>SKU</th>
+    <th>Price</th>
+    <th>Status</th>
+    <th>Stock</th>
+    <th>Actions</th>
+   </tr>
+
+   ${filteredProducts().map(p => `
+   <tr>
+    <td>${p.name}</td>
+    <td>${p.sku}</td>
+    <td>₹${p.price.toLocaleString()}</td>
+    <td>
+     <label>
+      <input type="checkbox" ${p.active ? "checked" : ""}
+       onchange="toggleProductStatus(${p.id})">
+      ${p.active ? "Active" : "Inactive"}
+     </label>
+    </td>
+    <td>
+     <a href="#" onclick="viewStock(${p.id})">
+      ${p.stock} units
+     </a>
+    </td>
+    <td>
+     <button onclick="viewProduct(${p.id})">View</button>
+     <button onclick="editProduct(${p.id})">Edit</button>
+     <button onclick="deleteProduct(${p.id})" style="background:#e74c3c">Delete</button>
+    </td>
+   </tr>
+   `).join("")}
+  </table>
+ </div>
+
+ ${productFormModal()}
+ ${productViewModal()}
+ `;
+    }
+
+    /* ---------------- FILTER ---------------- */
+
+    function filteredProducts() {
+      const q = document.getElementById("prodSearch")?.value.toLowerCase() || "";
+      return productsData.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.sku.toLowerCase().includes(q)
+      );
+    }
+
+    /* ---------------- STATUS TOGGLE ---------------- */
+
+    function toggleProductStatus(id) {
+      const p = productsData.find(x => x.id === id);
+      p.active = !p.active;
+      renderProducts();
+    }
+
+    /* ---------------- VIEW PRODUCT ---------------- */
+
+    function viewProduct(id) {
+      const p = productsData.find(x => x.id === id);
+      document.getElementById("productViewModal").style.display = "block";
+      document.getElementById("productViewContent").innerHTML = `
+ <h3>${p.name}</h3>
+ <p><b>SKU:</b> ${p.sku}</p>
+ <p><b>Price:</b> ₹${p.price}</p>
+ <p><b>Status:</b> ${p.active ? "Active" : "Inactive"}</p>
+ <p><b>Description:</b><br>${p.description}</p>
+ <p><b>Specifications:</b></p>
+ <pre style="background:#f6f8fb;padding:10px;border-radius:8px">
+${JSON.stringify(p.ingredients, null, 2)}
+ </pre>
+ `;
+    }
+
+    /* ---------------- STOCK VIEW ---------------- */
+
+    function viewStock(id) {
+      const p = productsData.find(x => x.id === id);
+      alert(`Current stock for ${p.name}: ${p.stock} units`);
+    }
+
+    /* ---------------- CRUD ---------------- */
+
+    function openProductForm(p = null) {
+      document.getElementById("productModal").style.display = "block";
+      if (p) {
+        prod_name.value = p.name;
+        prod_sku.value = p.sku;
+        prod_price.value = p.price;
+        prod_desc.value = p.description;
+        prod_specs.value = JSON.stringify(p.ingredients || p.specs || {}, null, 2);
+        prod_id.value = p.id;
+      }
+    }
+
+    function closeProductForm() {
+      document.getElementById("productModal").style.display = "none";
+      prod_id.value = "";
+    }
+
+    function saveProduct() {
+      const id = prod_id.value;
+      const sku = prod_sku.value.trim();
+
+      if (!sku) {
+        alert("SKU is required");
+        return;
+      }
+
+      if (!id && productsData.some(p => p.sku === sku)) {
+        alert("SKU must be unique");
+        return;
+      }
+
+      const data = {
+        id: id ? Number(id) : Date.now(),
+        name: prod_name.value,
+        sku: sku,
+        price: Number(prod_price.value),
+        description: prod_desc.value,
+        specs: JSON.parse(prod_specs.value || "{}"),
+        active: true,
+        stock: 0
+      };
+
+      if (id) {
+        const i = productsData.findIndex(p => p.id == id);
+        productsData[i] = { ...productsData[i], ...data };
+      } else {
+        productsData.push(data);
+      }
+
+      closeProductForm();
+      renderProducts();
+    }
+
+    function editProduct(id) {
+      openProductForm(productsData.find(p => p.id === id));
+    }
+
+    function deleteProduct(id) {
+      if (confirm("Delete this product?")) {
+        productsData = productsData.filter(p => p.id !== id);
+        renderProducts();
+      }
+    }
+
+    /* ---------------- MODALS ---------------- */
+
+    function productFormModal() {
+      return `
+ <div id="productModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4)">
+  <div class="card" style="max-width:600px;margin:5% auto">
+   <h3>Add / Edit Product</h3>
+   <input id="prod_id" type="hidden">
+
+   <input id="prod_name" placeholder="Product Name"><br><br>
+   <input id="prod_sku" placeholder="SKU"><br><br>
+   <input id="prod_price" placeholder="Price" type="number"><br><br>
+   <textarea id="prod_desc" placeholder="Description"></textarea><br><br>
+   <textarea id="prod_specs" placeholder='Specifications (JSON)'></textarea><br><br>
+
+   <button onclick="saveProduct()">Save</button>
+   <button onclick="closeProductForm()" style="background:#999">Cancel</button>
+  </div>
+ </div>
+ `;
+    }
+
+    function productViewModal() {
+      return `
+ <div id="productViewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4)">
+  <div class="card" style="max-width:600px;margin:5% auto">
+   <div id="productViewContent"></div>
+   <br>
+   <button onclick="document.getElementById('productViewModal').style.display='none'">
+    Close
+   </button>
+  </div>
+ </div>
+ `;
+    }
+    function openOrderModal(cid) {
+      const c = customersData.find(x => x.id === cid);
+      app.insertAdjacentHTML("beforeend", `
+ <div id="orderModal" style="position:fixed;inset:0;background:rgba(0,0,0,.4)">
+  <div class="card" style="max-width:500px;margin:10% auto">
+   <h3>New Order</h3>
+   <input id="orderAmount" placeholder="Order Amount"><br><br>
+   <select id="orderCategory">
+     <option>CALM</option>
+     <option>FOCUS</option>
+     <option>SMART</option>
+   </select><br><br>
+   <button onclick="saveOrder(${cid})">Save Order</button>
+   <button onclick="closeModal('orderModal')" style="background:#999">Cancel</button>
+  </div>
+ </div>
+ `);
+    }
+    function openOrderForm() {
+      app.insertAdjacentHTML("beforeend", `
+ <div id="orderModal" style="position:fixed;inset:0;background:rgba(0,0,0,.4)">
+  <div class="card" style="max-width:700px;margin:5% auto">
+   <h3>Create Order</h3>
+
+   <select id="orderCustomer">
+    ${customersData.map(c => `<option value="${c.id}">${c.name}</option>`)}
+   </select><br><br>
+
+   <div id="orderItems"></div>
+   <button onclick="addOrderItem()">+ Add Product</button>
+
+   <hr>
+   <button onclick="saveOrder()">Confirm Order</button>
+   <button onclick="closeModal('orderModal')" style="background:#999">Cancel</button>
+  </div>
+ </div>
+ `);
+
+      addOrderItem();
+    }
+
+    function saveOrder() {
+      const items = [];
+      document.querySelectorAll(".orderRow").forEach(r => {
+        const pid = Number(r.querySelector(".prod").value);
+        const qty = Number(r.querySelector(".qty").value);
+        const p = productsData.find(x => x.id === pid);
+        if (p && qty > 0) {
+          items.push({
+            productId: p.id,
+            name: p.name,
+            qty,
+            unitPrice: p.price,
+            total: p.price * qty
+          });
+        }
+      });
+
+      const subtotal = items.reduce((s, i) => s + i.total, 0);
+
+      const order = {
+        id: Date.now(),
+        orderNo: "NK-ORD-" + Math.floor(1000 + Math.random() * 9000),
+        customerId: Number(orderCustomer.value),
+        orderDate: new Date().toISOString().slice(0, 10),
+        status: "Confirmed",
+        items,
+        subtotal,
+        tax: subtotal * 0.1,
+        shipping: 150,
+        total: subtotal * 1.1 + 150,
+        timeline: [{ status: "Confirmed", date: new Date().toISOString().slice(0, 10) }]
+      };
+
+      deductInventory(items);
+      ordersData.unshift(order);
+      closeModal("orderModal");
+      renderOrders();
+    }
+    function cancelOrder(id) {
+      if (confirm("Cancel this order?")) {
+        const o = ordersData.find(x => x.id === id);
+        o.status = "Cancelled";
+        restockInventory(o.items);
+        o.timeline.push({ status: "Cancelled", date: new Date().toISOString().slice(0, 10) });
+        renderOrders();
+      }
+    }
+
+
+    function openFollowupModal(cid) {
+      app.insertAdjacentHTML("beforeend", `
+ <div id="followModal" style="position:fixed;inset:0;background:rgba(0,0,0,.4)">
+  <div class="card" style="max-width:500px;margin:10% auto">
+   <h3>Create Follow-up</h3>
+   <select id="followType">
+    <option>Call</option>
+    <option>Email</option>
+    <option>WhatsApp</option>
+    <option>Meeting</option>
+   </select><br><br>
+   <textarea id="followNote" placeholder="Notes"></textarea><br><br>
+   <button onclick="saveFollowup(${cid})">Save</button>
+   <button onclick="closeModal('followModal')" style="background:#999">Cancel</button>
+  </div>
+ </div>
+ `);
+    }
+
+    function saveFollowup(cid) {
+      const c = customersData.find(x => x.id === cid);
+      c.interactions.push({
+        date: new Date().toISOString().slice(0, 10),
+        type: followType.value,
+        note: followNote.value
+      });
+      closeModal("followModal");
+      openCustomerDetail(cid);
+    }
+    function openAddressModal(cid) {
+      app.insertAdjacentHTML("beforeend", `
+ <div id="addressModal" style="position:fixed;inset:0;background:rgba(0,0,0,.4)">
+  <div class="card" style="max-width:500px;margin:10% auto">
+   <h3>Add Address</h3>
+   <select id="addrType">
+    <option>Shipping</option>
+    <option>Billing</option>
+   </select><br><br>
+   <input id="addrLabel" placeholder="Label (Home/Office)"><br><br>
+   <textarea id="addrText" placeholder="Full Address"></textarea><br><br>
+   <button onclick="saveAddress(${cid})">Save</button>
+   <button onclick="closeModal('addressModal')" style="background:#999">Cancel</button>
+  </div>
+ </div>
+ `);
+    }
+
+    function saveAddress(cid) {
+      const c = customersData.find(x => x.id === cid);
+      c.addresses.push({
+        type: addrType.value,
+        label: addrLabel.value,
+        address: addrText.value
+      });
+      closeModal("addressModal");
+      openCustomerDetail(cid);
+    }
+    function closeModal(id) {
+      document.getElementById(id)?.remove();
+    }
+
+    /* ================= INVENTORY MODULE ================= */
+
+    function inventory() {
+      renderInventory();
+    }
+
+    function renderInventory() {
+      const lowStock = productsData.filter(p => p.stock > 0 && p.stock <= p.minStock);
+      const outOfStock = productsData.filter(p => p.stock === 0);
+
+      app.innerHTML = `
+ <h1>Inventory</h1>
+
+ <!-- ALERTS -->
+ ${lowStock.length ? `
+ <div class="card" style="border-left:5px solid orange">
+  ⚠️ Low Stock: ${lowStock.map(p => p.name).join(", ")}
+ </div><br>` : ""}
+
+ ${outOfStock.length ? `
+ <div class="card" style="border-left:5px solid red">
+  🚫 Out of Stock: ${outOfStock.map(p => p.name).join(", ")}
+ </div><br>` : ""}
+
+ <!-- KPIs -->
+ <div class="grid grid-4">
+  <div class="card"><div class="kpi">${productsData.length}</div>Total Products</div>
+  <div class="card"><div class="kpi">${lowStock.length}</div>Low Stock</div>
+  <div class="card"><div class="kpi">${outOfStock.length}</div>Out of Stock</div>
+  <div class="card"><div class="kpi">${productsData.reduce((s, p) => s + p.stock, 0)}</div>Total Units</div>
+ </div>
+
+ <br>
+
+ <!-- STOCK TABLE -->
+ <div class="card">
+  <h3>Stock Report</h3>
+  <table class="table">
+   <tr>
+    <th>Product</th>
+    <th>Available</th>
+    <th>Min Level</th>
+    <th>Status</th>
+    <th>Last Restocked</th>
+    <th>Action</th>
+   </tr>
+   ${productsData.map(p => `
+    <tr>
+     <td>${p.name}</td>
+     <td>${p.stock}</td>
+     <td>${p.minStock}</td>
+     <td>
+      ${p.stock === 0 ?
+          `<span style="color:red">Out of Stock</span>` :
+          p.stock <= p.minStock ?
+            `<span style="color:orange">Low Stock</span>` :
+            `<span style="color:green">In Stock</span>`}
+     </td>
+     <td>${p.lastRestocked || "-"}</td>
+     <td>
+      <button onclick="openRestockModal(${p.id})">Restock</button>
+      <button onclick="viewStockHistory(${p.id})">History</button>
+     </td>
+    </tr>
+   `).join("")}
+  </table>
+ </div>
+
+ <br>
+
+ <!-- CHARTS -->
+ <div class="grid grid-2">
+  <div class="card"><canvas id="stockChart"></canvas></div>
+  <div class="card"><canvas id="statusChart"></canvas></div>
+ </div>
+ `;
+
+      renderInventoryCharts();
+    }
+
+    function deductInventory(items) {
+      items.forEach(i => {
+        const p = productsData.find(p => p.id === i.productId);
+        if (p) p.stock -= i.qty;
+      });
+    }
+
+    function restockInventory(items) {
+      items.forEach(i => {
+        const p = productsData.find(p => p.id === i.productId);
+        if (p) p.stock += i.qty;
+      });
+    }
+
+    /* ================= RESTOCK ================= */
+
+    function openRestockModal(pid) {
+      app.insertAdjacentHTML("beforeend", `
+ <div id="restockModal" style="position:fixed;inset:0;background:rgba(0,0,0,.4)">
+  <div class="card" style="max-width:500px;margin:10% auto">
+   <h3>Restock Product</h3>
+   <input id="restockQty" type="number" placeholder="Quantity"><br><br>
+   <textarea id="restockNote" placeholder="Restock notes"></textarea><br><br>
+   <button onclick="saveRestock(${pid})">Confirm</button>
+   <button onclick="closeModal('restockModal')" style="background:#999">Cancel</button>
+  </div>
+ </div>
+ `);
+    }
+
+    function saveRestock(pid) {
+      const p = productsData.find(x => x.id === pid);
+      const qty = Number(restockQty.value);
+
+      if (qty <= 0) {
+        alert("Invalid quantity");
+        return;
+      }
+
+      p.stock += qty;
+      p.lastRestocked = new Date().toISOString().slice(0, 10);
+      p.history.push({
+        date: p.lastRestocked,
+        type: "IN",
+        qty: qty,
+        note: restockNote.value
+      });
+
+      closeModal("restockModal");
+      renderInventory();
+    }
+
+    /* ================= HISTORY ================= */
+
+    function viewStockHistory(pid) {
+      const p = productsData.find(x => x.id === pid);
+
+      app.insertAdjacentHTML("beforeend", `
+ <div id="historyModal" style="position:fixed;inset:0;background:rgba(0,0,0,.4)">
+  <div class="card" style="max-width:600px;margin:5% auto">
+   <h3>${p.name} – Stock Movement</h3>
+   ${p.history.map(h => `
+    <p>${h.date} | ${h.type} | ${h.qty} units<br>${h.note}</p>
+   `).join("")}
+   <br>
+   <button onclick="closeModal('historyModal')">Close</button>
+  </div>
+ </div>
+ `);
+    }
+
+    /* ================= CHARTS ================= */
+
+    function renderInventoryCharts() {
+      new Chart(document.getElementById("stockChart"), {
+        type: "bar",
+        data: {
+          labels: productsData.map(p => p.name),
+          datasets: [{
+            label: "Stock Level",
+            data: productsData.map(p => p.stock),
+            backgroundColor: "#35A9A9"
+          }]
+        }
+      });
+
+      const statusCount = {
+        "In Stock": productsData.filter(p => p.stock > p.minStock).length,
+        "Low Stock": productsData.filter(p => p.stock > 0 && p.stock <= p.minStock).length,
+        "Out of Stock": productsData.filter(p => p.stock === 0).length
+      };
+
+      new Chart(document.getElementById("statusChart"), {
+        type: "doughnut",
+        data: {
+          labels: Object.keys(statusCount),
+          datasets: [{
+            data: Object.values(statusCount),
+            backgroundColor: ["#2ecc71", "#f39c12", "#e74c3c"]
+          }]
+        }
+      });
+    }
+
+    /* ORDERS */
+    /* ================= ORDERS MODULE ================= */
+
+    let orderPage = 1;
+    const pageSize = 20;
+
+    function orders() {
+      renderOrders();
+    }
+
+    function renderOrders() {
+      const filtered = filteredOrders();
+      const paginated = filtered.slice((orderPage - 1) * pageSize, orderPage * pageSize);
+
+      app.innerHTML = `
+ <h1>Orders</h1>
+
+ <div class="card">
+  <div style="display:flex;gap:10px;margin-bottom:15px">
+   <input id="orderSearch" placeholder="Search order / customer" onkeyup="renderOrders()">
+   <select id="orderStatus" onchange="renderOrders()">
+    <option value="">All Status</option>
+    <option>Pending</option>
+    <option>Confirmed</option>
+    <option>Processing</option>
+    <option>Shipped</option>
+    <option>Delivered</option>
+    <option>Cancelled</option>
+   </select>
+   <input type="date" id="fromDate" onchange="renderOrders()">
+   <input type="date" id="toDate" onchange="renderOrders()">
+   <button onclick="openOrderForm()">+ Create Order</button>
+  </div>
+
+  <table class="table">
+   <tr>
+    <th>Order #</th>
+    <th>Customer</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Items</th>
+    <th>Total</th>
+    <th>Action</th>
+   </tr>
+   ${paginated.map(o => `
+    <tr>
+     <td>${o.orderNo}</td>
+     <td>${getCustomer(o.customerId).name}</td>
+     <td>${o.orderDate}</td>
+     <td>${o.status}</td>
+     <td>${o.items.length}</td>
+     <td>₹${o.total}</td>
+     <td>
+      <button onclick="viewOrder(${o.id})">View</button>
+      <button onclick="printInvoice(${o.id})">Print</button>
+      ${o.status !== "Cancelled" && o.status !== "Delivered"
+          ? `<button onclick="cancelOrder(${o.id})">Cancel</button>` : ""}
+     </td>
+    </tr>
+   `).join("")}
+  </table>
+
+  ${renderOrderPagination(filtered.length)}
+ </div>
+ `;
+    }
+    function filteredOrders() {
+      const q = document.getElementById("orderSearch")?.value.toLowerCase() || "";
+      const s = document.getElementById("orderStatus")?.value || "";
+      const from = document.getElementById("fromDate")?.value;
+      const to = document.getElementById("toDate")?.value;
+
+      return ordersData.filter(o => {
+        const c = getCustomer(o.customerId);
+        return (
+          (!q || o.orderNo.toLowerCase().includes(q) || c.name.toLowerCase().includes(q)) &&
+          (!s || o.status === s) &&
+          (!from || o.orderDate >= from) &&
+          (!to || o.orderDate <= to)
+        );
+      });
+    }
+
+    function renderOrderPagination(total) {
+      const pages = Math.ceil(total / pageSize);
+      if (pages <= 1) return "";
+
+      return `
+ <div style="margin-top:15px;text-align:center">
+  ${Array.from({ length: pages }, (_, i) => `
+   <button onclick="orderPage=${i + 1};renderOrders()"
+    ${orderPage === i + 1 ? "style='opacity:.6'" : ""}>
+    ${i + 1}
+   </button>
+  `).join("")}
+ </div>
+ `;
+    }
+    function printInvoice(id) {
+      const o = ordersData.find(x => x.id === id);
+      const c = getCustomer(o.customerId);
+      const w = window.open("");
+      w.document.write(`
+ <h2>Invoice ${o.orderNo}</h2>
+ <p>${c.name}</p>
+ <table border="1" cellpadding="6">
+  ${o.items.map(i => `
+   <tr>
+    <td>${i.name}</td>
+    <td>${i.qty}</td>
+    <td>${i.unitPrice}</td>
+    <td>${i.total}</td>
+   </tr>`).join("")}
+ </table>
+ <h3>Total ₹${o.total}</h3>
+ `);
+      w.print();
+    }
+
+    function viewOrder(id) {
+      const o = ordersData.find(x => x.id === id);
+      const c = getCustomer(o.customerId);
+
+      app.insertAdjacentHTML("beforeend", `
+ <div id="viewOrderModal" style="position:fixed;inset:0;background:rgba(0,0,0,.4)">
+  <div class="card" style="max-width:800px;margin:3% auto;max-height:90vh;overflow-y:auto">
+   <h3>Order Details - ${o.orderNo}</h3>
+   <p><b>Customer:</b> ${c.name}</p>
+   <p><b>Order Date:</b> ${o.orderDate}</p>
+   <p><b>Status:</b> ${o.status}</p>
+   
+   <hr>
+   <h4>Items</h4>
+   <table class="table">
+    <tr>
+     <th>Product</th>
+     <th>Quantity</th>
+     <th>Unit Price</th>
+     <th>Total</th>
+    </tr>
+    ${o.items.map(i => `
+     <tr>
+      <td>${i.name}</td>
+      <td>${i.qty}</td>
+      <td>₹${i.unitPrice}</td>
+      <td>₹${i.total}</td>
+     </tr>`).join("")}
+   </table>
+   
+   <hr>
+   <p><b>Subtotal:</b> ₹${o.subtotal}</p>
+   <p><b>Tax (10%):</b> ₹${o.tax}</p>
+   <p><b>Shipping:</b> ₹${o.shipping}</p>
+   <p><b>Total:</b> ₹${o.total}</p>
+   
+   <hr>
+   <h4>Timeline</h4>
+   ${o.timeline.map(t => `<p>${t.date} - ${t.status}</p>`).join("")}
+   
+   <br>
+   <button onclick="closeModal('viewOrderModal')">Close</button>
+   <button onclick="printInvoice(${o.id})">Print Invoice</button>
+  </div>
+ </div>
+ `);
+    }
+
+
+    /* SETTINGS */
+    /* ================= SETTINGS MODULE ================= */
+
+    function settings() {
+      app.innerHTML = `
+        <h1>Settings</h1>
+        
+        <div class="grid grid-2">
+            <div class="card">
+                <h3><i class="fa fa-user-circle"></i> User Profile</h3>
+                <div style="display:flex;flex-direction:column;gap:15px;margin-top:20px">
+                    <div>
+                        <label>Display Name</label><br>
+                        <input value="Admin User" style="width:100%">
+                    </div>
+                    <div>
+                        <label>Email Address</label><br>
+                        <input value="admin@neuronestkids.com" style="width:100%">
+                    </div>
+                    <div>
+                        <label>Role</label><br>
+                        <select style="width:100%" disabled>
+                            <option>Super Admin</option>
+                        </select>
+                    </div>
+                    <button onclick="alert('Profile Updated!')" style="width:fit-content">Save Changes</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa fa-sliders-h"></i> Application Preferences</h3>
+                <div style="margin-top:20px">
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border)">
+                        <div>
+                            <b>Dark Mode</b><br>
+                            <small style="color:#666">Enable dark theme for the dashboard</small>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" onchange="alert('Theme preference saved (Simulated)')">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border)">
+                        <div>
+                            <b>Email Notifications</b><br>
+                            <small style="color:#666">Receive daily digest of new leads</small>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked onchange="alert('Notification preference saved')">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0">
+                        <div>
+                            <b>Sound Alerts</b><br>
+                            <small style="color:#666">Play sound on new orders</small>
+                        </div>
+                         <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <h3>System Information</h3>
+            <p><b>Version:</b> 0.4.0 (Alpha)</p>
+            <p><b>Build Date:</b> 2026-01-18</p>
+            <p><b>Database Status:</b> <span style="color:green">● Connected</span></p>
+            <p><b>Last Backup:</b> Today, 04:00 AM</p>
+            <hr>
+            <button style="background:#e74c3c" onclick="alert('Cache cleared!')">Clear Application Cache</button>
+        </div>
+      `;
+    }
+
+    /* SCHEMA */
+    /* ================= SCHEMA MODULE ================= */
+
+    /* SCHEMA */
+    /* ================= SCHEMA MODULE ================= */
+
+    // Schema Table Definitions (Extracted from schema.in)
+    const tableDetails = {
+      "ADMINS": {
+        desc: "Manages administrative access and authentication.",
+        features: ["UUID Primary Keys", "Password Hashing", "Role-based Security"]
+      },
+      "PRODUCTS": {
+        desc: "Central catalogue of all items available for sale.",
+        features: ["JSONB for dynamic specs", "Category Constraints (CALM, FOCUS, SMART)", "SKU Indexes"]
+      },
+      "INVENTORY": {
+        desc: "Tracks stock levels in real-time.",
+        features: ["Auto-updates on Order", "Low Stock Triggers", "1-to-1 Product Mapping"]
+      },
+      "LEADS": {
+        desc: "Potential customer data tracking.",
+        features: ["Status Workflow (New -> Converted)", "Source Tracking", "Date Assignment"]
+      },
+      "CUSTOMERS": {
+        desc: "Converted leads with purchase history.",
+        features: ["Auto-stats (Total Spent/Orders)", "Linked to Addresses", "Review History"]
+      },
+      "ADDRESSES": {
+        desc: "Shipping and Billing locations.",
+        features: ["Multiple per Customer", "Type Validation", "Default Flag Support"]
+      },
+      "ORDERS": {
+        desc: "Transactional records of sales.",
+        features: ["Auto-generated Order IDs", "Inventory Deduction Triggers", "Financial Calculations"]
+      },
+      "ORDER_ITEMS": {
+        desc: "Individual line items within an order.",
+        features: ["Snapshot of Unit Price", "Quantity Tracking", "Linked to Products"]
+      },
+      "PAYMENTS": {
+        desc: "Payment transaction records.",
+        features: ["Multiple Payment Methods", "Status Tracking", "Secure Transaction Logs"]
+      },
+      "REVIEWS": {
+        desc: "Product feedback and ratings.",
+        features: ["Verified Purchase Check", "Admin Approval Workflow", "Rating Validation (1-5)"]
+      },
+      "INTERACTIONS": {
+        desc: "CRM touchpoints with leads/customers.",
+        features: ["Polymorphic Relation (Lead/Customer)", "Follow-up Scheduling", "Type Categorization"]
+      },
+      "AUDIT_LOGS": {
+        desc: "System-wide change tracking for security.",
+        features: ["JSONB Old/New Value Capture", "Action Type Logging", "User Attribution"]
+      }
+    };
+
+    // Column Definitions for Tooltips
+    const columnDefinitions = {
+      "ADMINS": ["id (UUID)", "email (VARCHAR)", "name (VARCHAR)", "password_hash", "last_login"],
+      "PRODUCTS": ["id (UUID)", "name", "category (CALM/FOCUS/SMART)", "sku (Unique)", "price", "stock", "is_active"],
+      "INVENTORY": ["id (UUID)", "product_id (FK)", "quantity", "min_stock_level", "last_restock"],
+      "LEADS": ["id (UUID)", "name", "email", "phone", "source", "status", "assigned_date"],
+      "CUSTOMERS": ["id (UUID)", "lead_id (FK)", "email", "total_orders", "total_spent", "customer_since"],
+      "ADDRESSES": ["id (UUID)", "customer_id (FK)", "type (BILL/SHIP)", "line1", "city", "state", "pincode"],
+      "ORDERS": ["id (UUID)", "order_no", "customer_id (FK)", "total_amount", "status", "order_date"],
+      "ORDER_ITEMS": ["id (UUID)", "order_id (FK)", "product_id (FK)", "quantity", "unit_price", "total"],
+      "PAYMENTS": ["id (UUID)", "order_id (FK)", "method", "amount", "status", "transaction_id"],
+      "REVIEWS": ["id (UUID)", "product_id (FK)", "rating (1-5)", "comment", "is_verified"],
+      "INTERACTIONS": ["id (UUID)", "related_to (Poly)", "type (Call/Email)", "date", "notes"],
+      "AUDIT_LOGS": ["id (UUID)", "table_name", "record_id", "action", "new_values", "changed_by"]
+    };
+
+    function schema() {
+      // Refresh mermaid if needed
+      setTimeout(() => {
+        mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        makeMermaidInteractive();
+      }, 500);
+
+      const dbSummary = `
+        <div class="grid grid-3">
+            <div class="card">
+                <h3 style="color:var(--secondary)">12 Tables</h3>
+                <p style="font-size:13px;color:#666">Normalized UUID-based architecture covering all CRM domains.</p>
+            </div>
+            <div class="card">
+                <h3 style="color:var(--secondary)">7 Triggers</h3>
+                <p style="font-size:13px;color:#666">Auto-timestamps, Inventory sync, Order numbering, Stats aggregation.</p>
+            </div>
+            <div class="card">
+                <h3 style="color:var(--secondary)">RLS Enabled</h3>
+                <p style="font-size:13px;color:#666">Row Level Security policies applied for data protection.</p>
+            </div>
+        </div>
+      `;
+
+      const whySupabase = `
+        <div class="card" style="margin-bottom:20px; border-left: 5px solid #3ECF8E">
+            <h2>Why Supabase?</h2>
+            <div class="grid grid-2">
+                <div>
+                    <ul style="line-height:1.6;color:#444">
+                        <li><b>⚡ Real-time Subscriptions:</b> Instant updates for dashboard KPIs without polling.</li>
+                        <li><b>🔒 Row Level Security (RLS):</b> Granular permission logic directly in the database.</li>
+                        <li><b>🌐 Auto-generated APIs:</b> Instant REST and GraphQL endpoints for all tables.</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul style="line-height:1.6;color:#444">
+                         <li><b>📈 Scalability:</b> Built on standard PostgreSQL, scaling to millions of rows.</li>
+                         <li><b>🧩 Extensions:</b> Native support for UUIDs, vector search, and GIS.</li>
+                         <li><b>🛠️ Developer Experience:</b> TypeScript support and intuitive dashboard.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      `;
+
+      const diagramSection = `
+        <div class="card" style="overflow:auto;">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3>Entity Relationship Diagram</h3>
+                <small style="color:#666">Hover/Click entities for details</small>
+            </div>
+            <div class="mermaid" style="text-align:center;cursor:pointer">
+                erDiagram
+                    ADMINS ||--o{ INTERACTIONS : creates
+                    ADMINS ||--o{ AUDIT_LOGS : logs
+                    
+                    PRODUCTS ||--|| INVENTORY : has
+                    PRODUCTS ||--o{ ORDER_ITEMS : includes
+                    PRODUCTS ||--o{ REVIEWS : receives
+                    
+                    LEADS ||--o| CUSTOMERS : converts_to
+                    LEADS ||--o{ INTERACTIONS : has
+                    
+                    CUSTOMERS ||--o{ ADDRESSES : has
+                    CUSTOMERS ||--o{ ORDERS : places
+                    CUSTOMERS ||--o{ REVIEWS : writes
+                    CUSTOMERS ||--o{ INTERACTIONS : has
+                    
+                    ADDRESSES ||--o{ ORDERS : shipping_address
+                    ADDRESSES ||--o{ ORDERS : billing_address
+                    
+                    ORDERS ||--o{ ORDER_ITEMS : contains
+                    ORDERS ||--o{ PAYMENTS : has
+            </div>
+            <div id="schema-detail-panel" style="margin-top:20px;padding:15px;background:#f8f9fa;border-radius:8px;display:none;border:1px solid var(--secondary)">
+                <h4 id="sd-title" style="margin:0 0 10px 0;color:var(--secondary)"></h4>
+                <p id="sd-desc" style="margin:0 0 10px 0"></p>
+                <b>Key Features:</b>
+                <ul id="sd-features" style="margin:5px 0 0 20px;padding:0"></ul>
+            </div>
+        </div>
+      `;
+
+      app.innerHTML = `
+        <h1>Database Architecture</h1>
+        ${whySupabase}
+        ${dbSummary}
+        <br>
+        ${diagramSection}
+        <br>
+        <div style="text-align:center;color:#999;font-size:12px;margin-bottom:20px">
+           Schema Version 1.0 | Visualized with Mermaid.js
+        </div>
+
+        <div id="mermaid-tooltip" class="schema-tooltip"></div>
+      `;
+    }
+
+    function makeMermaidInteractive() {
+      // Need to wait for SVG to render
+      setTimeout(() => {
+        const svg = document.querySelector('.mermaid svg');
+        if (!svg) {
+          console.log("Mermaid SVG not found");
+          return;
+        }
+
+        // Find entity nodes
+        Object.keys(tableDetails).forEach(tableName => {
+          // Robust Strategy: 
+          // 1. Look for ID pattern (entity-{Name}) which Mermaid typically uses
+          // 2. Fallback to searching text content within G elements
+
+          let entityGroup = svg.querySelector(`[id^="entity-${tableName}"]`);
+          const tooltip = document.getElementById('mermaid-tooltip');
+
+          if (!entityGroup) {
+            // Fallback: search all groups for specific text match
+            const allGroups = Array.from(svg.querySelectorAll('g'));
+            entityGroup = allGroups.find(g => {
+              const text = g.textContent.trim();
+              return text === tableName || text.startsWith(tableName + " ");
+            });
+          }
+
+          if (entityGroup) {
+            entityGroup.style.cursor = 'pointer';
+
+            // Attach Click
+            entityGroup.addEventListener('click', (e) => {
+              e.stopPropagation(); // prevent bubbling issues
+              showTableDetails(tableName);
+            });
+
+            // Attach Hover (Visual Feedback and Tooltip)
+            entityGroup.addEventListener('mouseenter', (e) => {
+              const box = entityGroup.querySelector('rect') || entityGroup.querySelector('polygon');
+              const txt = entityGroup.querySelector('text');
+
+              if (box) {
+                box.dataset.origStroke = box.style.stroke;
+                box.dataset.origWidth = box.style.strokeWidth;
+                box.style.stroke = 'var(--secondary)';
+                box.style.strokeWidth = '3px';
+              }
+              if (txt) {
+                txt.style.fill = 'var(--secondary)';
+                txt.style.fontWeight = 'bold';
+              }
+
+              // Show tooltip
+              if (tooltip) {
+                const cols = columnDefinitions[tableName] || [];
+                tooltip.innerHTML = `
+                      <h4>${tableName}</h4>
+                      <ul>
+                          ${cols.map(c => `<li>${c}</li>`).join('')}
+                      </ul>
+                  `;
+                tooltip.style.display = 'block';
+                tooltip.style.left = (e.clientX + 15) + 'px';
+                tooltip.style.top = (e.clientY + 15) + 'px';
+              }
+            });
+
+            entityGroup.addEventListener('mousemove', (e) => {
+              if (tooltip) {
+                tooltip.style.left = (e.clientX + 15) + 'px';
+                tooltip.style.top = (e.clientY + 15) + 'px';
+              }
+            });
+
+            entityGroup.addEventListener('mouseleave', () => {
+              const box = entityGroup.querySelector('rect') || entityGroup.querySelector('polygon');
+              const txt = entityGroup.querySelector('text');
+
+              if (box) {
+                box.style.stroke = box.dataset.origStroke || '';
+                box.style.strokeWidth = box.dataset.origWidth || '';
+              }
+              if (txt) txt.style.fill = '';
+              if (tooltip) tooltip.style.display = 'none';
+            });
+          }
+        });
+      }, 1500); // Increased delay to ensure rendering is complete
+    }
+
+    function showTableDetails(name) {
+      const d = tableDetails[name];
+      if (!d) return;
+
+      const panel = document.getElementById('schema-detail-panel');
+      document.getElementById('sd-title').innerText = name;
+      document.getElementById('sd-desc').innerText = d.desc;
+      document.getElementById('sd-features').innerHTML = d.features.map(f => `<li>${f}</li>`).join('');
+
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+
+      // Highlight effect
+      panel.style.boxShadow = '0 0 20px rgba(53, 169, 169, 0.3)';
+      setTimeout(() => panel.style.boxShadow = 'none', 500);
+    }
+
+
+    load("dashboard")
+  </script>
+
+</body>
+
+</html>
